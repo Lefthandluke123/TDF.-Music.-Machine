@@ -181,18 +181,10 @@
             const beatsInBar = parseInt(document.getElementById('timeSignature').value);
 
             metroInterval = setInterval(() => {
-            
-
                 
              const beatInBar = currentBeat % beatsInBar;
 
-// NIEUWE LOGICA VOOR ACCENTEN:
-let isAccent = (beatInBar === 0); // Standaard accent op de eerste tel
 
-if (beatsInBar === 9) {
-    // Voor 9/8: accent op tel 1, 4 en 7 (index 0, 3 en 6)
-    isAccent = (beatInBar === 0 || beatInBar === 3 || beatInBar === 6);
-}
                 const isAccent = (beatInBar === 0);
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
