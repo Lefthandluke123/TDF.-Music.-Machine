@@ -183,14 +183,6 @@
             metroInterval = setInterval(() => {
                 
              const beatInBar = currentBeat % beatsInBar;
-
-                // NIEUWE ACCENT LOGICA:
-                // Als het 9/8 is (beatsInBar == 9), accent op 0, 3 en 6 (tel 1, 4 en 7)
-                // Anders alleen op 0 (tel 1)
-                let isAccent = (beatInBar === 0);
-                if (beatsInBar === 9) {
-                    isAccent = (beatInBar === 0 || beatInBar === 3 || beatInBar === 6);
-                }
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.frequency.value = isAccent ? 1000 : 600;
