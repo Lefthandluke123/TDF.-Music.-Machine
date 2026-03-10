@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TDF Music Machine</title>
+    <title>TDF Pro Toolset - V2.0</title>
+    
     <style>
         :root {
             --bg-dark: #1a1c1a;
@@ -12,215 +13,210 @@
             --griffin-orange: #e67e22;
             --griffin-red: #c0392b;
             --text-light: #e0eadd;
-            --lcd-bg: #0d110d;
+            --vu-paper: #eeeeee;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-light);
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
         }
 
-        .header { text-align: center; margin: 20px 0; width: 90%; }
-        
-        /* Logo stijl met pulse-animatie */
-        .logo { 
-            max-height: 80px; 
-            max-width: 100%; 
-            height: auto; 
-            margin-bottom: 10px; 
-            object-fit: contain;
-            transition: transform 0.1s, filter 0.1s;
-        }
+        .header { text-align: center; margin: 20px 0; }
+        .logo { max-height: 80px; transition: 0.1s; }
+        .logo.pulse { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--celtic-green)); }
 
-        .logo.pulse {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 10px var(--celtic-green));
-        }
-
-        .container { width: 100%; max-width: 500px; padding: 20px 10px; }
+        .container { width: 95%; max-width: 500px; }
 
         .card {
-            background: var(--card-bg); padding: 25px; border-radius: 25px;
+            background: var(--card-bg); padding: 20px; border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center;
-            border: 2px solid var(--celtic-green);
+            border: 2px solid var(--celtic-green); margin-bottom: 20px;
         }
 
-        select, input[type=range] {
-            width: 100%; padding: 12px; margin: 10px 0 20px 0;
-            border-radius: 8px; background: #111; color: white; border: 1px solid var(--celtic-green); font-size: 16px;
+        /* VU Meter Dynamiek */
+        .vu-meter {
+            background: var(--vu-paper); border: 4px solid #333; border-radius: 10px;
+            height: 140px; position: relative; overflow: hidden; margin-bottom: 15px;
+            transition: background 0.3s ease;
+        }
+        .vu-meter.correct { background: #50fa7b !important; box-shadow: inset 0 0 40px #2ecc71; }
+        .vu-meter.too-low { background: #ffb86c; }
+        .vu-meter.too-high { background: #ff79c6; }
+        .vu-meter.glow-accent { background: #f1fa8c; }
+
+        .vu-needle {
+            width: 3px; height: 100px; background: #c0392b;
+            position: absolute; bottom: -5px; left: 50%;
+            transform-origin: bottom center; transform: rotate(-45deg);
+            transition: transform 0.2s ease-out; z-index: 5;
         }
 
+        #noteDisplay { font-size: 2.5rem; font-weight: bold; color: #333; position: absolute; top: 10px; width: 100%; text-align: center; }
+
+        .bpm-display { font-size: 3rem; font-weight: bold; color: var(--celtic-green); }
         button {
-            width: 100%; padding: 18px; border: none; border-radius: 15px;
-            font-size: 18px; font-weight: bold; color: white;
-            background: var(--celtic-green); cursor: pointer; transition: 0.1s;
+            width: 100%; padding: 15px; border: none; border-radius: 12px;
+            font-size: 16px; font-weight: bold; color: white;
+            background: var(--celtic-green); cursor: pointer; margin-top: 5px;
         }
-
         button.active-btn { background: var(--griffin-red); }
 
-        .bpm-display { font-size: 4rem; font-weight: bold; color: var(--celtic-green); }
-        .beat-indicator { display: flex; justify-content: center; gap: 6px; margin-top: 20px; flex-wrap: wrap; }
-        .dot { width: 14px; height: 14px; background: #333; border-radius: 50%; transition: 0.1s; }
-        .dot.lit { background: var(--celtic-green); transform: scale(1.3); }
-        .dot.accent-mark { border: 2px solid var(--griffin-orange); }
-        .hints { font-size: 14px; color: var(--griffin-orange); margin-top: 10px; font-weight: bold; min-height: 1.2em; }
+        .dot { width: 12px; height: 12px; background: #333; border-radius: 50%; display: inline-block; margin: 3px; }
+        .dot.lit { background: var(--celtic-green); }
+
+        footer { padding: 20px; color: #666; font-size: 11px; text-align: center; }
     </style>
 </head>
-<body>
 
+<body>
     <div class="header">
         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzRhN2MyYyI+PHBhdGggZD0iTTEyIDJMMiA3djEwbDEwIDUgMTAtNVY3TDEyIDJ6bTAgMi44bTcuNSAzLjdMMTIgMTIuMSA0LjUgOC41IDEyIDQuOHpNNCAxNi4xVjkuNWw3IDIuNnY2LjZsLTcgLTIuNnptMTYgMEwxMyAxOC43di02LjZsNy0yLjZ2Ni42eiIvPjwvc3ZnPg==" 
-             alt="TDF Logo" class="logo" id="mainLogo">
-        <h1>TDF Music Machine</h1>
+             id="mainLogo" class="logo" alt="TDF Logo">
+        <h1>TDF Pro Machine</h1>
     </div>
 
     <div class="container">
         <div class="card">
+            <div class="vu-meter" id="vuBox">
+                <div id="noteDisplay">-</div>
+                <div class="vu-needle" id="needle"></div>
+            </div>
+
             <div class="bpm-display" id="bpmText">110</div>
             <input type="range" id="tempoSlider" min="40" max="220" value="110">
             
             <select id="timeSig">
                 <option value="4">Reel (4/4)</option>
                 <option value="4h">Hornpipe (Swung)</option>
-                <option value="2">Polka (2/4)</option>
                 <option value="6">Jig (6/8)</option>
-                <option value="9">Slip Jig (9/8)</option>
-                <option value="12">Slide (12/8)</option>
             </select>
-
-            <div class="hints" id="rhythmHint">Straight: 1 - 2 - 3 - 4</div>
             
-            <div class="beat-indicator" id="dots"></div>
-            <br>
-            <button id="metroBtn">START MACHINE</button>
+            <div id="dots"></div>
+            <button id="metroBtn">START METRONOOM</button>
+        </div>
+
+        <div class="card">
+            <button id="tunerBtn">START LIVE TUNER</button>
         </div>
     </div>
 
+    <footer>&copy; 2024 TDF MUSIC - ANALOOG/DIGITAAL HYBRIDE</footer>
+
     <script>
-        let metroCtx, metroTimer, isMetroRunning = false;
+        let audioCtx, metroTimer, isRunning = false, isTuning = false;
         let nextNoteTime = 0.0, currentBeat = 0;
-        const metroBtn = document.getElementById('metroBtn');
-        const timeSig = document.getElementById('timeSig');
-        const dotsContainer = document.getElementById('dots');
-        const rhythmHint = document.getElementById('rhythmHint');
-        const mainLogo = document.getElementById('mainLogo');
+        let analyser, dataArray;
 
-        const hints = {
-            "4": "Straight: 1 - 2 - 3 - 4",
-            "4h": "Swing: Humpty - Dumpty",
-            "2": "Fast: 1 - 2, 1 - 2",
-            "6": "Jig: Rashers-and-Sausages",
-            "9": "Slip Jig: 1-2-3, 4-5-6, 7-8-9",
-            "12": "Slide: Heavy 12/8 feel"
-        };
+        const needle = document.getElementById('needle');
+        const vuBox = document.getElementById('vuBox');
+        const noteDisplay = document.getElementById('noteDisplay');
 
-        function createDots() {
-            dotsContainer.innerHTML = '';
-            const val = timeSig.value === "4h" ? 4 : parseInt(timeSig.value);
-            for (let i = 0; i < val; i++) {
-                const d = document.createElement('div');
-                d.className = 'dot';
-                if (i === 0) d.classList.add('accent-mark');
-                dotsContainer.appendChild(d);
+        // Pitch Tracking
+        const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+        async function startTuner() {
+            if (!audioCtx) audioCtx = new AudioContext();
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const source = audioCtx.createMediaStreamSource(stream);
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 2048;
+            source.connect(analyser);
+            dataArray = new Float32Array(analyser.fftSize);
+            drawTuner();
+        }
+
+        function drawTuner() {
+            if (!isTuning) return;
+            analyser.getFloatTimeDomainData(dataArray);
+            const freq = autoCorrelate(dataArray, audioCtx.sampleRate);
+
+            if (freq !== -1) {
+                const h = 12 * Math.log2(freq / 440);
+                const noteIndex = (Math.round(h) + 69) % 12;
+                noteDisplay.textContent = notes[noteIndex];
+                
+                const cents = Math.floor(100 * (h - Math.round(h)));
+                needle.style.transform = `rotate(${cents}deg)`;
+
+                // KLEUR FEEDBACK OP BASIS VAN JUISTHEID
+                if (Math.abs(cents) < 5) {
+                    vuBox.className = "vu-meter correct"; // PERFECT STAMELEND GROEN
+                } else if (cents < 0) {
+                    vuBox.className = "vu-meter too-low"; // TE LAAG
+                } else {
+                    vuBox.className = "vu-meter too-high"; // TE HOOG
+                }
             }
-            rhythmHint.textContent = hints[timeSig.value];
-            currentBeat = 0;
+            requestAnimationFrame(drawTuner);
         }
 
-        function playWoodblock(time, frequency, volume) {
-            const osc = metroCtx.createOscillator();
-            const gain = metroCtx.createGain();
-            const filter = metroCtx.createBiquadFilter();
-
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(frequency, time);
-
-            filter.type = 'lowpass';
-            filter.frequency.setValueAtTime(1200, time);
-
-            gain.gain.setValueAtTime(0, time);
-            gain.gain.linearRampToValueAtTime(volume, time + 0.005);
-            gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
-
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(metroCtx.destination);
-
-            osc.start(time);
-            osc.stop(time + 0.2);
+        function autoCorrelate(buf, sampleRate) {
+            let rms = 0;
+            for (let i=0; i<buf.length; i++) rms += buf[i]*buf[i];
+            if (Math.sqrt(rms/buf.length) < 0.01) return -1;
+            let c = new Float32Array(buf.length);
+            for (let i=0; i<buf.length; i++) for (let j=0; j<buf.length-i; j++) c[i] = c[i] + buf[j]*buf[j+i];
+            let d=0; while (c[d]>c[d+1]) d++;
+            let maxval=-1, maxpos=-1;
+            for (let i=d; i<buf.length; i++) if (c[i] > maxval) { maxval = c[i]; maxpos = i; }
+            return sampleRate/maxpos;
         }
 
-        function metroScheduler() {
-            while (nextNoteTime < metroCtx.currentTime + 0.1) {
-                const sigType = timeSig.value;
-                const isHornpipe = (sigType === "4h");
-                const sig = isHornpipe ? 4 : parseInt(sigType);
-
-                let isAccent = (currentBeat === 0);
-                if (sig === 6 && currentBeat === 3) isAccent = true;
-                if (sig === 9 && (currentBeat === 3 || currentBeat === 6)) isAccent = true;
-                if (sig === 12 && (currentBeat === 3 || currentBeat === 6 || currentBeat === 9)) isAccent = true;
-
-                let volume = isAccent ? 0.4 : 0.2;
-                let freq = isAccent ? 880 : 440;
-
-                if (isHornpipe && currentBeat % 2 !== 0) volume *= 0.7;
-
-                playWoodblock(nextNoteTime, freq, volume);
+        // Metronoom
+        function scheduler() {
+            while (nextNoteTime < audioCtx.currentTime + 0.1) {
+                const isAccent = currentBeat === 0;
+                const osc = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.value = isAccent ? 880 : 440;
+                g.gain.setValueAtTime(0.3, nextNoteTime);
+                g.gain.exponentialRampToValueAtTime(0.001, nextNoteTime + 0.1);
+                osc.connect(g); g.connect(audioCtx.destination);
+                osc.start(nextNoteTime); osc.stop(nextNoteTime + 0.2);
 
                 const bIdx = currentBeat;
                 setTimeout(() => {
+                    if (!isTuning) {
+                        vuBox.className = isAccent ? "vu-meter glow-accent" : "vu-meter";
+                        needle.style.transform = `rotate(${isAccent ? 30 : -20}deg)`;
+                        setTimeout(() => vuBox.className = "vu-meter", 100);
+                    }
                     document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('lit', i === bIdx));
-                    
-                    // Logo pulse effect
-                    mainLogo.classList.add('pulse');
-                    setTimeout(() => mainLogo.classList.remove('pulse'), 100);
-                }, (nextNoteTime - metroCtx.currentTime) * 1000);
+                }, (nextNoteTime - audioCtx.currentTime) * 1000);
 
-                const tempo = parseInt(document.getElementById('tempoSlider').value);
-                const secondsPerBeat = 60.0 / tempo;
-
-                if (isHornpipe) {
-                    nextNoteTime += (currentBeat % 2 === 0) ? secondsPerBeat * 0.6 : secondsPerBeat * 0.4;
-                } else if (sig === 6 || sig === 9 || sig === 12) {
-                    nextNoteTime += secondsPerBeat / 2;
-                } else {
-                    nextNoteTime += secondsPerBeat;
-                }
-
-                currentBeat = (currentBeat + 1) % sig;
+                nextNoteTime += 60.0 / parseInt(tempoSlider.value);
+                currentBeat = (currentBeat + 1) % parseInt(timeSig.value);
             }
-            metroTimer = setTimeout(metroScheduler, 25);
+            metroTimer = setTimeout(scheduler, 25);
         }
 
-        function toggleMetro() {
-            if (!metroCtx) metroCtx = new (window.AudioContext || window.webkitAudioContext)();
-            isMetroRunning = !isMetroRunning;
-            if (isMetroRunning) {
-                currentBeat = 0;
-                nextNoteTime = metroCtx.currentTime + 0.05;
-                metroScheduler();
-                metroBtn.textContent = 'STOP MACHINE';
-                metroBtn.classList.add('active-btn');
-            } else {
-                clearTimeout(metroTimer);
-                metroBtn.textContent = 'START MACHINE';
-                metroBtn.classList.remove('active-btn');
-            }
-        }
-
-        createDots();
-        timeSig.onchange = createDots;
-        metroBtn.onclick = toggleMetro;
-        document.getElementById('tempoSlider').oninput = (e) => {
-            document.getElementById('bpmText').textContent = e.target.value;
+        metroBtn.onclick = () => {
+            if (!audioCtx) audioCtx = new AudioContext();
+            isRunning = !isRunning;
+            if (isRunning) { currentBeat = 0; nextNoteTime = audioCtx.currentTime; scheduler(); metroBtn.textContent="STOP"; }
+            else { clearTimeout(metroTimer); metroBtn.textContent="START METRONOOM"; }
         };
+
+        tunerBtn.onclick = () => {
+            isTuning = !isTuning;
+            if (isTuning) { startTuner(); tunerBtn.textContent = "STOP TUNER"; }
+            else { tunerBtn.textContent = "START LIVE TUNER"; vuBox.className = "vu-meter"; }
+        };
+
+        function createDots() {
+            const dots = document.getElementById('dots');
+            dots.innerHTML = '';
+            for(let i=0; i<parseInt(timeSig.value); i++) dots.innerHTML += '<div class="dot"></div>';
+        }
+        timeSig.onchange = createDots;
+        tempoSlider.oninput = () => bpmText.textContent = tempoSlider.value;
+        createDots();
     </script>
 </body>
 </html>
