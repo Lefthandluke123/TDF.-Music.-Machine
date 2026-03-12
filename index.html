@@ -51,8 +51,7 @@
             cursor: pointer;
             border-radius: 4px;
             font-weight: bold;
-            width: auto; /* Versmald naar breedte van tekst */
-            display: block;
+            width: auto;
         }
 
         #manualPanel {
@@ -86,13 +85,13 @@
             font-variant: small-caps;
         }
 
-        .manual-sectie p, .manual-sectie li { line-height: 1.5; font-size: 0.9rem; }
+        .manual-sectie p, .manual-sectie li { line-height: 1.5; font-size: 0.95rem; margin-bottom: 10px; }
         .disclaimer-box { 
             background: rgba(0,0,0,0.05); 
-            padding: 10px; 
+            padding: 15px; 
             border-radius: 4px; 
             border-left: 5px solid var(--griffin-red); 
-            margin: 15px 0;
+            margin: 20px 0;
             font-size: 0.85rem;
         }
 
@@ -118,7 +117,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            min-height: 550px;
+            min-height: 560px;
         }
 
         .card.in-tune { border-color: var(--tune-success); box-shadow: 0 0 30px rgba(46, 204, 113, 0.5); }
@@ -155,6 +154,15 @@
             font-size: 0.9rem; cursor: pointer; font-weight: bold;
         }
 
+        .noise-toggle-container {
+            margin: 15px auto; display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: #0f110f; padding: 10px 20px; border-radius: 50px; width: fit-content;
+        }
+        .mode-label { font-size: 0.75rem; font-weight: bold; opacity: 0.3; }
+        #noiseToggle:not(:checked) ~ .label-stil { opacity: 1; color: var(--text-light); }
+        #noiseToggle:checked ~ .label-kroeg { opacity: 1; color: var(--griffin-orange); }
+        #noiseToggle { width: 40px; accent-color: var(--griffin-orange); cursor: pointer; }
+
         .display-text { font-size: 3.5rem; font-weight: bold; color: var(--griffin-orange); margin: 15px 0; font-family: monospace; }
         
         select, input[type=range], input[type=text] {
@@ -169,12 +177,10 @@
             background: var(--celtic-green); cursor: pointer;
             text-transform: uppercase;
         }
-        button.active-btn { background: var(--griffin-red); }
 
         #sessionLog { margin: 15px 0; height: 160px; overflow-y: auto; background: rgba(0,0,0,0.3); border-radius: 5px; padding: 10px; }
         .log-entry { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #333; font-size: 0.8rem; gap: 10px; }
         
-        /* HORIZONTALE LOGBOEK KNOPPEN IN KLEUR */
         .log-btns { display: flex; gap: 6px; flex-shrink: 0; }
         .small-btn { padding: 6px 10px; font-size: 0.65rem; border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold; text-transform: uppercase; }
         .btn-play { background: var(--celtic-green); }
@@ -198,32 +204,36 @@
         <div class="manual-grid">
             <div class="manual-sectie">
                 <h3>📘 Handleiding (NL)</h3>
-                <p>Welkom bij de Music Machine van <strong>The Doggy Few</strong>.</p>
+                <p>Welkom bij de officiële Music Machine van <strong>The Doggy Few</strong>. Deze toolkit is ontworpen om je te ondersteunen bij repetities en live optredens.</p>
                 <ul>
-                    <li><strong>TDF Tuner:</strong> Kies je instrument en gebruik de snaar-knoppen voor referentie of START voor microfoon. Stem tot de naald op 0 staat.</li>
-                    <li><strong>TDF Live Recorder:</strong> Voer naam en locatie in. Gebruik START om op te nemen. In de lijst kun je direct afspelen (PLAY), opslaan (SAVE) of de opname wissen (DEL).</li>
-                    <li><strong>TDF Metronoom:</strong> Selecteer de maatsoort (Reel, Jig, Slipjig of Waltz) en stel het tempo in.</li>
+                    <li><strong>TDF Tuner:</strong> Kies je instrument in het menu. Gebruik de ronde knoppen om een referentietoon te horen. Klik op START voor de microfoon-modus. De naald reageert op je spel; streef naar het midden (0). Gebruik de <strong>KROEG stand</strong> bij veel omgevingslawaai.</li>
+                    <li><strong>TDF Live Recorder:</strong> Voer een tracknaam en locatie in. Klik op START om de opname te beginnen. Na het stoppen verschijnt de opname in de lijst. Gebruik <strong>PLAY</strong> om te luisteren, <strong>SAVE</strong> om het bestand lokaal op te slaan, en <strong>DEL</strong> om een opname te verwijderen.</li>
+                    <li><strong>TDF Metronoom:</strong> Kies je tempo en maatsoort (Reel, Jig, Slipjig of Waltz). De machine geeft een accent op de eerste tel.</li>
                 </ul>
                 <div class="disclaimer-box">
                     <strong>Privacy & Veiligheid:</strong><br>
-                    Alle audioverwerking is lokaal. Geen serveropslag. Microfoontoegang is vereist. Gebruik op eigen risico.
+                    • Alle audioverwerking gebeurt lokaal in je browser. Er worden geen gegevens naar een server verzonden.<br>
+                    • De applicatie heeft toestemming voor de microfoon nodig voor de tuner en recorder.<br>
+                    • Gebruik van deze applicatie is volledig op eigen risico.
                 </div>
-                <p>Groningen, Holland. <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
+                <p>Wij zijn <strong>The Doggy Few Irish Party Music</strong> uit Groningen. We hopen dat deze tool je helpt! Vragen: <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
             </div>
             
             <div class="manual-sectie">
                 <h3>📘 User Manual (EN)</h3>
-                <p>Professional toolkit by <strong>The Doggy Few</strong>.</p>
+                <p>Welcome to the <strong>The Doggy Few</strong> Music Machine. A professional toolkit for musicians.</p>
                 <ul>
-                    <li><strong>TDF Tuner:</strong> Select instrument. Use buttons or microphone. Center the needle at 0.</li>
-                    <li><strong>TDF Live Recorder:</strong> Enter track info and hit START. Use PLAY to review, SAVE to download, and DEL to remove.</li>
-                    <li><strong>TDF Metronome:</strong> Select time signature (Reel, Jig, etc.) and adjust tempo slider.</li>
+                    <li><strong>TDF Tuner:</strong> Select your instrument. Use the string buttons for reference pitch or click START for microphone mode. Aim for the center (0). Use <strong>PUB mode</strong> for tuning in noisy environments.</li>
+                    <li><strong>TDF Live Recorder:</strong> Enter track name and location. Click START to begin. Use <strong>PLAY</strong> to review, <strong>SAVE</strong> to download the WAV file, and <strong>DEL</strong> to remove recordings.</li>
+                    <li><strong>TDF Metronome:</strong> Set your time signature (Reel, Jig, etc.) and adjust the tempo slider.</li>
                 </ul>
                 <div class="disclaimer-box">
-                    <strong>Legal:</strong><br>
-                    Local processing only. No data sent to servers. Mic access required. Use at your own risk.
+                    <strong>Legal & Privacy:</strong><br>
+                    • Privacy: All processing is local. No data is stored or sent to any server.<br>
+                    • Permission: Microphone access is required.<br>
+                    • Liability: Use is entirely at your own risk.
                 </div>
-                <p>Questions? <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
+                <p>Based in Groningen, Holland. Contact us at: <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
             </div>
         </div>
     </div>
@@ -237,6 +247,11 @@
             </div>
             <select id="instrumentSelect"></select>
             <div class="string-nodes" id="stringNodes"></div>
+            <div class="noise-toggle-container">
+                <span class="mode-label label-stil">STIL</span>
+                <input type="checkbox" id="noiseToggle">
+                <span class="mode-label label-kroeg">KROEG</span>
+            </div>
             <button id="tunerBtn">START TUNER</button>
         </div>
 
@@ -296,8 +311,9 @@
         }
 
         function autoCorrelate(buf, sampleRate) {
+            const threshold = document.getElementById('noiseToggle').checked ? 0.05 : 0.015;
             let rms = 0; for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
-            rms = Math.sqrt(rms / buf.length); if (rms < 0.015) return -1;
+            rms = Math.sqrt(rms / buf.length); if (rms < threshold) return -1;
             let c = new Float32Array(buf.length);
             for (let i = 0; i < buf.length; i++) { for (let j = 0; j < buf.length - i; j++) c[i] = c[i] + buf[j] * buf[j + i]; }
             let d = 0; while (c[d] > c[d + 1]) d++;
@@ -322,6 +338,7 @@
                 nDisplay.textContent = NOTES[(Math.round(12 * Math.log2(closest / 440)) + 69) % 12];
                 document.getElementById('tunerCard').classList.toggle('in-tune', Math.abs(centsOff) < 4);
             } else if (Date.now() - lastNoteTime > 800) {
+                smoothedCents = -50;
                 needle.style.transform = `rotate(-50deg)`; nDisplay.textContent = "-";
                 document.getElementById('tunerCard').classList.remove('in-tune');
             }
@@ -372,21 +389,9 @@
                     const name = document.getElementById('recordName').value || "Opname";
                     const loc = document.getElementById('recordLocation').value || "Live";
                     const entry = document.createElement('div'); entry.className = 'log-entry';
-                    
-                    // HORIZONTALE STRUCTUUR MET GEKLEURDE KNOPPEN
-                    entry.innerHTML = `
-                        <span class="entry-info">• ${name} (${loc})</span>
-                        <div class="log-btns">
-                            <button class="small-btn btn-play">PLAY</button>
-                            <button class="small-btn btn-save">SAVE</button>
-                            <button class="small-btn btn-del">DEL</button>
-                        </div>`;
-                    
+                    entry.innerHTML = `<span>• ${name} (${loc})</span><div class="log-btns"><button class="small-btn btn-play">PLAY</button><button class="small-btn btn-save">SAVE</button><button class="small-btn btn-del">DEL</button></div>`;
                     let a = new Audio(url);
-                    entry.querySelector('.btn-play').onclick = function() { 
-                        if (activeLogAudio && !a.paused) { a.pause(); this.textContent = "PLAY"; } 
-                        else { if (activeLogAudio) activeLogAudio.pause(); a.play(); this.textContent = "STOP"; activeLogAudio = a; a.onended=()=>this.textContent="PLAY";} 
-                    };
+                    entry.querySelector('.btn-play').onclick = function() { if (activeLogAudio && !a.paused) { a.pause(); this.textContent = "PLAY"; } else { if (activeLogAudio) activeLogAudio.pause(); a.play(); this.textContent = "STOP"; activeLogAudio = a; a.onended=()=>this.textContent="PLAY";} };
                     entry.querySelector('.btn-save').onclick = () => { const link = document.createElement('a'); link.href = url; link.download = `${name}_${loc}.wav`; link.click(); };
                     entry.querySelector('.btn-del').onclick = () => { if(confirm("Opname verwijderen?")) entry.remove(); };
                     log.prepend(entry);
