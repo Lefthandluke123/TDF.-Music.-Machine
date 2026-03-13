@@ -32,7 +32,6 @@
         input[type=range] {
             accent-color: var(--griffin-orange) !important;
         }
-        /* --- EINDE FIX --- */
 
         body {
             font-family: 'Georgia', serif;
@@ -108,6 +107,7 @@
         .btn-del { background: var(--griffin-red); }
 
         #recordStatus { display: none; width: 60px; height: 5px; background: var(--griffin-orange); margin: 0 auto 10px auto; border-radius: 3px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
         footer { margin-top: 40px; padding: 20px; text-align: center; border-top: 1px solid #333; width: 100%; font-size: 0.9rem;}
     </style>
 </head>
@@ -120,16 +120,14 @@
         <div class="manual-grid">
             <div class="manual-sectie">
                 <h3>📘 Handleiding (NL)</h3>
-                <p>Welkom bij de officiële Music Machine van <strong>The Doggy Few</strong>. Deze toolkit is ontworpen om je te ondersteunen bij repetities en live optredens.</p>
+                <p>Welkom bij de Music Machine van <strong>The Doggy Few</strong>.</p>
                 <ul>
-                    <li><strong>TDF Tuner:</strong> Kies je instrument. Gebruik de ronde knoppen voor een referentietoon (1x klik = 2 sec, dubbelklik = constant klinken). Een klinkende noot stopt direct bij de volgende klik.</li>
-                    <li><strong>TDF Live Recorder:</strong> Klik op START voor de opname. Pas namen in het logboek direct aan. Gebruik <strong>SAVE</strong> voor lokale opslag.</li>
-                    <li><strong>TDF Metronoom:</strong> Kies tempo en maat (bijv. 4/4 Reel). De <strong>ring</strong> pulseert: Groen zijn hoofd- en sub-accenten, Oranje zijn tussentikken.</li>
+                    <li><strong>TDF Tuner:</strong> Kies je instrument (Gitaar, Banjo, Bouzouki, Viool). 1x klik = 2 sec referentietoon, dubbelklik = constant klinken.</li>
+                    <li><strong>TDF Live Recorder:</strong> Klik op START. De oranje balk pulseert tijdens opname. Pas namen in het logboek direct aan.</li>
+                    <li><strong>TDF Metronoom:</strong> Groen zijn hoofd- en sub-accenten, Oranje zijn tussentikken.</li>
                 </ul>
                 <div class="disclaimer-box">
-                    <strong>Privacy & Veiligheid:</strong><br>
-                    • Alle audioverwerking gebeurt lokaal. Geen dataverkeer naar servers.<br>
-                    • Microfoontoegang is vereist voor tuner en recorder.
+                    <strong>Privacy:</strong> Alle audioverwerking gebeurt lokaal. Geen dataverkeer naar servers.
                 </div>
                 <p>Dit is een muzikaal kadootje en blijft ons eigendom. Je mag het gratis gebruiken en delen met anderen voor niet-commerciële activiteiten. Het leven is te kort voor valse noten of matige timing.</p>
                 <p>Hartelijke groet uit Groningen, Holland.</p>
@@ -140,17 +138,11 @@
                 <h3>📘 User Manual (EN)</h3>
                 <p>Welcome to the <strong>The Doggy Few</strong> Music Machine.</p>
                 <ul>
-                    <li><strong>TDF Tuner:</strong> Select instrument. Use buttons for reference (1-click = 2s, double-click = infinite). Any click stops the tone.</li>
-                    <li><strong>TDF Live Recorder:</strong> Record locally. Track names in the log are editable.</li>
-                    <li><strong>TDF Metronome:</strong> Set signature (e.g., 4/4 Reel). <strong>Ring</strong> pulses: Green (Accents), Orange (Other).</li>
+                    <li><strong>TDF Tuner:</strong> Select instrument. Buttons: 1-click = 2s, double-click = infinite.</li>
+                    <li><strong>TDF Live Recorder:</strong> Pulsing orange bar indicates recording. Editable track names in log.</li>
+                    <li><strong>TDF Metronome:</strong> Green (Accents), Orange (Other).</li>
                 </ul>
-                <div class="disclaimer-box">
-                    <strong>Legal & Privacy:</strong><br>
-                    • All processing is local. No data stored or sent.
-                </div>
-                <p>This is a musical gift and remains our property. You may use it for free and share it with others for non-commercial activities. Life is too short for false notes or poor timing.</p>
-                <p>Warm regards from Groningen, Holland.</p>
-                <p>We are <strong>The Doggy Few Irish Party Music</strong>. Contact: <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
+                <p>This is a musical gift. Life is too short for false notes or poor timing. Warm regards from Groningen, Holland.</p>
             </div>
         </div>
     </div>
@@ -237,6 +229,7 @@
             "Gitaar (Standaard)": [82.41, 110.0, 146.83, 196.0, 246.94, 329.63], 
             "Banjo (GDAE)": [196.0, 293.66, 440.0, 659.25], 
             "Bouzouki (GDAD)": [196.0, 146.83, 220.0, 293.66], 
+            "Viool": [196.0, 293.66, 440.0, 659.25],
             "Ukelele": [392.0, 261.63, 329.63, 440.0] 
         };
         const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -381,6 +374,7 @@
                 if (i === 0) color = '#2ecc71'; 
                 else if ((sig === '6' || sig === '12' || sig === '9') && i % 3 === 0) color = '#2ecc71'; 
                 else if (sig === '4' && i === 2) color = '#2ecc71'; 
+                else if (sig === '3' && i === 0) color = '#2ecc71';
                 c.style.stroke = color; c.id = `seg-${i}`; container.appendChild(c);
             }
         }
