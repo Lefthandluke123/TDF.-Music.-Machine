@@ -133,12 +133,12 @@
                     <tr><td><b>9/8 Slipjig</b></td><td>Apples and Oranges</td></tr>
                     <tr><td><b>6/8 Jig</b></td><td>Rashers and Sausages</td></tr>
                     <tr><td><b>4/4 Reel</b></td><td>Blackberry Strawberry</td></tr>
-                    <tr><td><b>4/4 Hornpipe</b></td><td>Step-and-hop</td></tr>
+                    <tr><td><b>4/4 Hornpipe</b></td><td>Step-and-hop (Gepunteerd ritme)</td></tr>
                 </table>
-                <p><i>Hoe te gebruiken:</i> Zeg de lettergrepen mee op het tempo. De <b>dikgedrukte</b> klank valt samen met de <b>Groene flits</b>.</p>
+                <p><i>Hoe te gebruiken:</i> Zeg de lettergrepen hardop mee op het tempo. De <b>dikgedrukte</b> klank valt samen met de <b>Groene flits</b> op de ring.</p>
                 <p><strong>Contact & Support:</strong> Bugreports, feature verzoekjes, bedankjes of overig contact: <a href="mailto:Info@doggyfew.com">Info@doggyfew.com</a></p>
                 <div class="disclaimer-box">
-                    <strong>Kadootje:</strong> Dit blijft eigendom van The Doggy Few. Deel het gerust voor niet-commercieel gebruik. Het leven is simpelweg te kort voor valse noten of een matige timing. :)
+                    <strong>Kadootje:</strong> Dit is een muzikaal kadootje en blijft eigendom van The Doggy Few. Deel het gerust voor niet-commercieel gebruik. Het leven is simpelweg te kort voor valse noten of een matige timing. :)
                 </div>
                 <p>Hartelijke groet uit Groningen, Holland.</p>
             </div>
@@ -147,11 +147,11 @@
                 <h3>📘 User Manual (EN)</h3>
                 <p>Official toolkit for rehearsals and live sessions. Designed for stability and precision.</p>
                 <ul>
-                    <li><strong>Tuner:</strong> Select instrument (Guitar, Banjo, Bouzouki, <strong>Violin</strong>, Uke). Single click for 2s, double click for loop.</li>
-                    <li><strong>Recorder:</strong> The orange bar pulses when recording is active. Rename tracks in the log before saving.</li>
+                    <li><strong>Tuner:</strong> Select instrument (Guitar, Banjo, Bouzouki, <strong>Violin</strong>, Uke). Single click for 2s tone, double click for infinite loop. Click any active string to mute instantly.</li>
+                    <li><strong>Recorder:</strong> The orange bar pulses when recording is active. Rename tracks in the log before saving as a WAV file.</li>
+                    <li><strong>Rhythm Mnemonics:</strong> Master the flow by using "Apples and Oranges" (9/8), "Rashers and Sausages" (6/8), or "Blackberry Strawberry" (4/4).</li>
+                    <li><strong>Support:</strong> For bug reports, feature requests or thanks: <a href="mailto:Info@doggyfew.com">Info@doggyfew.com</a></li>
                 </ul>
-                <p><strong>Rhythm Mnemonics:</strong> Master the flow by using "Apples and Oranges" (9/8), "Rashers and Sausages" (6/8), or "Blackberry Strawberry" (4/4).</p>
-                <p><strong>Support:</strong> For bug reports, feature requests or thanks: <a href="mailto:Info@doggyfew.com">Info@doggyfew.com</a></p>
                 <div class="disclaimer-box">
                    <strong>Note:</strong> This is a musical gift and remains our property. Life is too short for bum notes and poor timing..:)
                 </div>
@@ -237,6 +237,7 @@
         let metroTimer, isRunning = false, nextNoteTime = 0, currentStep = 0;
         let mediaRecorder, audioChunks = [], isRecording = false, activeLogAudio = null, recordStream = null;
         let activeToneInfo = { source: null, gain: null, freq: null, timer: null, mode: null };
+        let practiceInterval, practiceTimeLeft = 1200, isPracticeRunning = false;
 
         const INSTRUMENTS = { 
             "Gitaar (Standaard)": [82.41, 110.0, 146.83, 196.0, 246.94, 329.63], 
@@ -257,9 +258,77 @@
             if (audioCtx.state === 'suspended') audioCtx.resume(); 
         }
 
+        // --- PRACTICE TIMER LOGICA ---
+        const timerSlider = document.getElementById('timerSlider');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const timerBtn = document.getElementById('timerBtn');
+
+        timerSlider.oninput = function() {
+            if (!isPracticeRunning) {
+                practiceTimeLeft = this.value * 60;
+                updateTimerDisplay();
+            }
+        };
+
+        function updateTimerDisplay() {
+            const m = Math.floor(practiceTimeLeft / 60);
+            const s = practiceTimeLeft % 60;
+            timerDisplay.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+
+        function playPracticeEnd() {
+            initAudio();
+            const now = audioCtx.currentTime;
+            for(let i=0; i<3; i++) {
+                const osc = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(880, now + (i * 0.2));
+                g.gain.setValueAtTime(0.1, now + (i * 0.2));
+                g.gain.exponentialRampToValueAtTime(0.001, now + (i * 0.2) + 0.1);
+                osc.connect(g); g.connect(audioCtx.destination);
+                osc.start(now + (i * 0.2)); osc.stop(now + (i * 0.2) + 0.1);
+            }
+        }
+
+        timerBtn.onclick = function() {
+            initAudio();
+            if (!isPracticeRunning) {
+                isPracticeRunning = true;
+                this.textContent = "STOP SESSIE";
+                this.style.background = "var(--griffin-red)";
+                practiceInterval = setInterval(() => {
+                    practiceTimeLeft--;
+                    updateTimerDisplay();
+                    if (practiceTimeLeft <= 0) {
+                        clearInterval(practiceInterval);
+                        isPracticeRunning = false;
+                        playPracticeEnd();
+                        timerBtn.textContent = "KLAAR!";
+                        setTimeout(() => { 
+                            timerBtn.textContent = "START SESSIE"; 
+                            timerBtn.style.background = "var(--celtic-green)";
+                            practiceTimeLeft = timerSlider.value * 60;
+                            updateTimerDisplay();
+                        }, 3000);
+                    }
+                }, 1000);
+            } else {
+                clearInterval(practiceInterval);
+                isPracticeRunning = false;
+                this.textContent = "START SESSIE";
+                this.style.background = "var(--celtic-green)";
+            }
+        };
+
+        // --- TUNER LOGICA ---
         function stopActiveTone() {
-            if (activeToneInfo.source) {
-                try { activeToneInfo.source.stop(); } catch(e){}
+            if (activeToneInfo.source && activeToneInfo.gain) {
+                const now = audioCtx.currentTime;
+                activeToneInfo.gain.gain.cancelScheduledValues(now);
+                activeToneInfo.gain.gain.linearRampToValueAtTime(0, now + 0.2);
+                const oldSource = activeToneInfo.source;
+                setTimeout(() => { try { oldSource.stop(); } catch(e){} }, 250);
                 activeToneInfo.source = null;
                 if (activeToneInfo.timer) clearTimeout(activeToneInfo.timer);
                 document.querySelectorAll('.string-node').forEach(n => n.classList.remove('active-tone'));
@@ -280,25 +349,23 @@
                     lastClick = now;
                     initAudio();
                     if (activeToneInfo.source) {
+                        const sameFreq = activeToneInfo.freq === freq;
                         stopActiveTone();
-                        if (activeToneInfo.freq === freq && !isDoubleClick) { activeToneInfo.freq = null; return; }
+                        if (sameFreq && !isDoubleClick) { activeToneInfo.freq = null; return; }
                     }
                     activeToneInfo.freq = freq;
                     node.classList.add('active-tone');
                     const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
                     osc.type = 'triangle'; osc.frequency.value = freq;
                     g.gain.setValueAtTime(0, audioCtx.currentTime);
-                    g.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.1);
+                    g.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.1);
                     osc.connect(g); g.connect(audioCtx.destination);
                     const tG = audioCtx.createGain(); osc.connect(tG); tG.connect(analyser);
                     osc.start(); activeToneInfo.source = osc; activeToneInfo.gain = g;
                     if (isDoubleClick) { activeToneInfo.mode = 'infinite'; } 
                     else { 
                         activeToneInfo.mode = 'timed';
-                        activeToneInfo.timer = setTimeout(() => {
-                            if(activeToneInfo.gain) activeToneInfo.gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
-                            setTimeout(() => { if(activeToneInfo.freq === freq) stopActiveTone(); }, 500);
-                        }, 2000);
+                        activeToneInfo.timer = setTimeout(() => { stopActiveTone(); }, 2000);
                     }
                     if (!isTuning) { isTuning = true; drawTuner(); }
                 };
@@ -352,6 +419,7 @@
             } else { isTuning = false; document.getElementById('tunerBtn').textContent = "START TUNER"; }
         };
 
+        // --- RECORDER LOGICA ---
         document.getElementById('recBtn').onclick = async () => {
             initAudio(); 
             if (!isRecording) {
@@ -367,17 +435,15 @@
                         const url = URL.createObjectURL(blob);
                         const log = document.getElementById('logContent'); 
                         if (log.innerHTML.includes('Geen opnames')) log.innerHTML = '';
-                        const defaultName = document.getElementById('recordName').value || "Track";
                         const entry = document.createElement('div'); entry.className = 'log-entry';
-                        entry.innerHTML = `<div class="log-row-top"><input type="text" class="edit-name-input" value="${defaultName}"></div><div class="log-row-bottom"><button class="small-btn btn-play">PLAY</button><button class="small-btn btn-save">SAVE</button><button class="small-btn btn-del">DEL</button></div>`;
+                        entry.innerHTML = `<div class="log-row-top"><input type="text" class="edit-name-input" value="${document.getElementById('recordName').value || 'Track'}"></div><div class="log-row-bottom"><button class="small-btn btn-play">PLAY</button><button class="small-btn btn-save">SAVE</button><button class="small-btn btn-del">DEL</button></div>`;
                         let a = new Audio(url);
                         entry.querySelector('.btn-play').onclick = function() { 
                             if (activeLogAudio && !a.paused) { a.pause(); this.textContent = "PLAY"; } 
                             else { if (activeLogAudio) activeLogAudio.pause(); a.play(); this.textContent = "STOP"; activeLogAudio = a; a.onended=()=>this.textContent="PLAY"; } 
                         };
                         entry.querySelector('.btn-save').onclick = () => { 
-                            const curName = entry.querySelector('.edit-name-input').value; 
-                            const link = document.createElement('a'); link.href = url; link.download = `${curName}.wav`; link.click(); 
+                            const link = document.createElement('a'); link.href = url; link.download = `${entry.querySelector('.edit-name-input').value}.wav`; link.click(); 
                         };
                         entry.querySelector('.btn-del').onclick = () => { if(confirm("Wissen?")) entry.remove(); };
                         log.prepend(entry);
@@ -387,6 +453,7 @@
             } else { mediaRecorder.stop(); isRecording = false; document.getElementById('recBtn').textContent = "START OPNAME"; }
         };
 
+        // --- METRONOOM LOGICA ---
         function setupRing() {
             const container = document.getElementById('segmentsLayer'); container.innerHTML = '';
             const sig = document.getElementById('timeSig').value;
