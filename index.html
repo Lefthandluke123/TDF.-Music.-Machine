@@ -66,6 +66,8 @@
         @media (min-width: 850px) { .manual-grid { grid-template-columns: 1fr 1fr; } }
         .manual-sectie h3 { color: var(--celtic-green); border-bottom: 2px solid var(--celtic-green); padding-bottom: 8px; margin-top: 0; font-variant: small-caps; }
         .manual-sectie p, .manual-sectie li { line-height: 1.5; font-size: 0.95rem; margin-bottom: 10px; }
+        .mnemonic-table { width: 100%; font-size: 0.8rem; border-collapse: collapse; margin: 10px 0; background: rgba(0,0,0,0.03); }
+        .mnemonic-table td { padding: 6px 8px; border-bottom: 1px solid rgba(0,0,0,0.1); }
         .disclaimer-box { background: rgba(0,0,0,0.05); padding: 15px; border-radius: 4px; border-left: 5px solid var(--griffin-red); margin: 20px 0; font-size: 0.85rem; }
 
         .container { display: grid; grid-template-columns: 1fr; gap: 25px; width: 100%; max-width: 1100px; }
@@ -120,29 +122,40 @@
         <div class="manual-grid">
             <div class="manual-sectie">
                 <h3>📘 Handleiding (NL)</h3>
-                <p>Welkom bij de Music Machine van <strong>The Doggy Few</strong>.</p>
+                <p>Welkom bij de Music Machine van <strong>The Doggy Few</strong>. Deze toolkit is ontwikkeld voor repetities en live sessies.</p>
                 <ul>
-                    <li><strong>TDF Tuner:</strong> Kies je instrument (Gitaar, Banjo, Bouzouki, Viool). 1x klik = 2 sec referentietoon, dubbelklik = constant klinken.</li>
-                    <li><strong>TDF Live Recorder:</strong> Klik op START. De oranje balk pulseert tijdens opname. Pas namen in het logboek direct aan.</li>
-                    <li><strong>TDF Metronoom:</strong> Groen zijn hoofd- en sub-accenten, Oranje zijn tussentikken.</li>
+                    <li><strong>Tuner:</strong> Kies je instrument (nu ook <strong>Viool</strong>). Eén klik op een snaar geeft 2 seconden geluid. Dubbelklik voor een constante toon. Een klik op een spelende snaar stopt het geluid direct.</li>
+                    <li><strong>Live Recorder:</strong> Klik op START om de opname te beginnen. De oranje balk boven de tracknaam pulseert zachtjes zolang de opname loopt. Na het stoppen kun je de tracknaam direct aanpassen en de opname lokaal opslaan (SAVE).</li>
+                    <li><strong>Metronoom:</strong> Groen geeft de hoofdaccenten aan, Oranje de tussentikken.</li>
                 </ul>
+                <p><strong>Ritme Training:</strong> Gebruik de ezelsbruggetjes om in de juiste cadans te komen:</p>
+                <table class="mnemonic-table">
+                    <tr><td><b>9/8 Slipjig</b></td><td>Apples and Oranges</td></tr>
+                    <tr><td><b>6/8 Jig</b></td><td>Rashers and Sausages</td></tr>
+                    <tr><td><b>4/4 Reel</b></td><td>Blackberry Strawberry</td></tr>
+                    <tr><td><b>4/4 Hornpipe</b></td><td>Step-and-hop</td></tr>
+                </table>
+                <p><i>Hoe te gebruiken:</i> Zeg de lettergrepen mee op het tempo. De <b>dikgedrukte</b> klank valt samen met de <b>Groene flits</b>.</p>
+                <p><strong>Contact & Support:</strong> Bugreports, feature verzoekjes, bedankjes of overig contact: <a href="mailto:Info@doggyfew.com">Info@doggyfew.com</a></p>
                 <div class="disclaimer-box">
-                    <strong>Privacy:</strong> Alle audioverwerking gebeurt lokaal. Geen dataverkeer naar servers.
+                    <strong>Kadootje:</strong> Dit blijft eigendom van The Doggy Few. Deel het gerust voor niet-commercieel gebruik. Het leven is simpelweg te kort voor valse noten of een matige timing. :)
                 </div>
-                <p>Dit is een muzikaal kadootje en blijft ons eigendom. Je mag het gratis gebruiken en delen met anderen voor niet-commerciële activiteiten. Het leven is te kort voor valse noten of matige timing.</p>
                 <p>Hartelijke groet uit Groningen, Holland.</p>
-                <p>Wij zijn <strong>The Doggy Few Irish Party Music</strong>. Vragen: <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
             </div>
             
             <div class="manual-sectie">
                 <h3>📘 User Manual (EN)</h3>
-                <p>Welcome to the <strong>The Doggy Few</strong> Music Machine.</p>
+                <p>Official toolkit for rehearsals and live sessions. Designed for stability and precision.</p>
                 <ul>
-                    <li><strong>TDF Tuner:</strong> Select instrument. Buttons: 1-click = 2s, double-click = infinite.</li>
-                    <li><strong>TDF Live Recorder:</strong> Pulsing orange bar indicates recording. Editable track names in log.</li>
-                    <li><strong>TDF Metronome:</strong> Green (Accents), Orange (Other).</li>
+                    <li><strong>Tuner:</strong> Select instrument (Guitar, Banjo, Bouzouki, <strong>Violin</strong>, Uke). Single click for 2s, double click for loop.</li>
+                    <li><strong>Recorder:</strong> The orange bar pulses when recording is active. Rename tracks in the log before saving.</li>
                 </ul>
-                <p>This is a musical gift. Life is too short for false notes or poor timing. Warm regards from Groningen, Holland.</p>
+                <p><strong>Rhythm Mnemonics:</strong> Master the flow by using "Apples and Oranges" (9/8), "Rashers and Sausages" (6/8), or "Blackberry Strawberry" (4/4).</p>
+                <p><strong>Support:</strong> For bug reports, feature requests or thanks: <a href="mailto:Info@doggyfew.com">Info@doggyfew.com</a></p>
+                <div class="disclaimer-box">
+                   <strong>Note:</strong> This is a musical gift and remains our property. Life is too short for bum notes and poor timing..:)
+                </div>
+                <p>Warm regards from Groningen, Holland.</p>
             </div>
         </div>
     </div>
@@ -220,9 +233,9 @@
     <footer>&copy; 2026 THE DOGGY FEW &bull; INFO@DOGGYFEW.COM</footer>
 
     <script>
-        let audioCtx, analyser, dataArray, isTuning = false, lastNoteTime = 0, smoothedCents = -50, activeSource = null;
+        let audioCtx, analyser, dataArray, isTuning = false, lastNoteTime = 0, smoothedCents = -50;
         let metroTimer, isRunning = false, nextNoteTime = 0, currentStep = 0;
-        let mediaRecorder, audioChunks = [], isRecording = false, activeLogAudio = null;
+        let mediaRecorder, audioChunks = [], isRecording = false, activeLogAudio = null, recordStream = null;
         let activeToneInfo = { source: null, gain: null, freq: null, timer: null, mode: null };
 
         const INSTRUMENTS = { 
@@ -314,7 +327,7 @@
             const nDisplay = document.getElementById('noteDisplay');
             if (freq > 0) {
                 lastNoteTime = Date.now();
-                let targets = INSTRUMENTS[document.getElementById('instrumentSelect').value] || INSTRUMENTS["Gitaar (Standaard)"];
+                let targets = INSTRUMENTS[document.getElementById('instrumentSelect').value];
                 let closest = targets.reduce((a, b) => Math.abs(b - freq) < Math.abs(a - freq) ? b : a);
                 let centsOff = 1200 * Math.log2(freq / closest);
                 smoothedCents = (smoothedCents * 0.8) + (centsOff * 0.2);
@@ -329,28 +342,43 @@
         }
 
         document.getElementById('tunerBtn').onclick = async () => {
-            initAudio(); if (!isTuning) {
-                try { const s = await navigator.mediaDevices.getUserMedia({ audio: true }); audioCtx.createMediaStreamSource(s).connect(analyser); isTuning = true; drawTuner(); document.getElementById('tunerBtn').textContent = "STOP";
+            initAudio(); 
+            if (!isTuning) {
+                try { 
+                    const s = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    audioCtx.createMediaStreamSource(s).connect(analyser);
+                    isTuning = true; drawTuner(); document.getElementById('tunerBtn').textContent = "STOP";
                 } catch (e) { alert("Mic nodig."); }
             } else { isTuning = false; document.getElementById('tunerBtn').textContent = "START TUNER"; }
         };
 
         document.getElementById('recBtn').onclick = async () => {
-            initAudio(); if (!isRecording) {
-                try { const s = await navigator.mediaDevices.getUserMedia({ audio: true }); mediaRecorder = new MediaRecorder(s); audioChunks = [];
+            initAudio(); 
+            if (!isRecording) {
+                try { 
+                    recordStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(recordStream); audioChunks = [];
                     document.getElementById('recordStatus').style.display = 'block';
                     mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
                     mediaRecorder.onstop = () => {
                         document.getElementById('recordStatus').style.display = 'none';
-                        const blob = new Blob(audioChunks, { type: 'audio/wav' }); const url = URL.createObjectURL(blob);
-                        const log = document.getElementById('logContent'); if (log.innerHTML.includes('Geen opnames')) log.innerHTML = '';
+                        recordStream.getTracks().forEach(track => track.stop());
+                        const blob = new Blob(audioChunks, { type: 'audio/wav' }); 
+                        const url = URL.createObjectURL(blob);
+                        const log = document.getElementById('logContent'); 
+                        if (log.innerHTML.includes('Geen opnames')) log.innerHTML = '';
                         const defaultName = document.getElementById('recordName').value || "Track";
-                        const loc = document.getElementById('recordLocation').value || "Live";
                         const entry = document.createElement('div'); entry.className = 'log-entry';
-                        entry.innerHTML = `<div class="log-row-top"><input type="text" class="edit-name-input" value="${defaultName} (${loc})"></div><div class="log-row-bottom"><button class="small-btn btn-play">PLAY</button><button class="small-btn btn-save">SAVE</button><button class="small-btn btn-del">DEL</button></div>`;
+                        entry.innerHTML = `<div class="log-row-top"><input type="text" class="edit-name-input" value="${defaultName}"></div><div class="log-row-bottom"><button class="small-btn btn-play">PLAY</button><button class="small-btn btn-save">SAVE</button><button class="small-btn btn-del">DEL</button></div>`;
                         let a = new Audio(url);
-                        entry.querySelector('.btn-play').onclick = function() { if (activeLogAudio && !a.paused) { a.pause(); this.textContent = "PLAY"; } else { if (activeLogAudio) activeLogAudio.pause(); a.play(); this.textContent = "STOP"; activeLogAudio = a; a.onended=()=>this.textContent="PLAY"; } };
-                        entry.querySelector('.btn-save').onclick = () => { const curName = entry.querySelector('.edit-name-input').value; const link = document.createElement('a'); link.href = url; link.download = `${curName}.wav`; link.click(); };
+                        entry.querySelector('.btn-play').onclick = function() { 
+                            if (activeLogAudio && !a.paused) { a.pause(); this.textContent = "PLAY"; } 
+                            else { if (activeLogAudio) activeLogAudio.pause(); a.play(); this.textContent = "STOP"; activeLogAudio = a; a.onended=()=>this.textContent="PLAY"; } 
+                        };
+                        entry.querySelector('.btn-save').onclick = () => { 
+                            const curName = entry.querySelector('.edit-name-input').value; 
+                            const link = document.createElement('a'); link.href = url; link.download = `${curName}.wav`; link.click(); 
+                        };
                         entry.querySelector('.btn-del').onclick = () => { if(confirm("Wissen?")) entry.remove(); };
                         log.prepend(entry);
                     };
@@ -374,7 +402,6 @@
                 if (i === 0) color = '#2ecc71'; 
                 else if ((sig === '6' || sig === '12' || sig === '9') && i % 3 === 0) color = '#2ecc71'; 
                 else if (sig === '4' && i === 2) color = '#2ecc71'; 
-                else if (sig === '3' && i === 0) color = '#2ecc71';
                 c.style.stroke = color; c.id = `seg-${i}`; container.appendChild(c);
             }
         }
@@ -420,6 +447,7 @@
         document.getElementById('tempoSlider').oninput = () => document.getElementById('bpmText').textContent = tempoSlider.value;
         document.getElementById('manualBtn').onclick = () => { const p = document.getElementById('manualPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; };
         document.getElementById('instrumentSelect').onchange = updateStringNodes;
+        
         Object.keys(INSTRUMENTS).forEach(inst => { let opt = document.createElement('option'); opt.value = inst; opt.textContent = inst; instrumentSelect.appendChild(opt); });
         setupRing(); updateStringNodes();
     </script>
