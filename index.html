@@ -17,7 +17,22 @@
             --tune-success: #2ecc71;
         }
 
-        * { box-sizing: border-box; }
+        /* --- DE DEFINITIEVE ORANJE FIX --- */
+        * { 
+            box-sizing: border-box; 
+            outline: none !important; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        input:focus, select:focus, textarea:focus, button:focus {
+            border-color: var(--griffin-orange) !important;
+            box-shadow: 0 0 8px rgba(212, 142, 61, 0.6) !important;
+        }
+
+        input[type=range] {
+            accent-color: var(--griffin-orange) !important;
+        }
+        /* --- EINDE FIX --- */
 
         body {
             font-family: 'Georgia', serif;
@@ -32,27 +47,9 @@
         }
 
         .header { text-align: center; margin-bottom: 20px; width: 100%; }
-        .header h1 { 
-            font-variant: small-caps; 
-            letter-spacing: 2px; 
-            color: var(--griffin-orange); 
-            line-height: 1.1;
-            margin: 0;
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-        }
+        .header h1 { font-variant: small-caps; letter-spacing: 2px; color: var(--griffin-orange); line-height: 1.1; margin: 0; font-size: clamp(1.8rem, 5vw, 2.8rem); }
 
-        #manualBtn {
-            background: transparent;
-            border: 2px solid var(--griffin-orange);
-            color: var(--griffin-orange);
-            padding: 8px 25px;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: bold;
-            width: auto;
-        }
+        #manualBtn { background: transparent; border: 2px solid var(--griffin-orange); color: var(--griffin-orange); padding: 8px 25px; font-size: 0.9rem; margin-bottom: 25px; cursor: pointer; border-radius: 4px; font-weight: bold; width: auto; }
 
         #manualPanel {
             max-width: 1100px;
@@ -66,138 +63,57 @@
             border: 3px double var(--celtic-green);
         }
 
-        .manual-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            padding: 30px;
-        }
-
-        @media (min-width: 850px) {
-            .manual-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        .manual-sectie h3 { 
-            color: var(--celtic-green); 
-            border-bottom: 2px solid var(--celtic-green); 
-            padding-bottom: 8px; 
-            margin-top: 0;
-            font-variant: small-caps;
-        }
-
+        .manual-grid { display: grid; grid-template-columns: 1fr; gap: 40px; padding: 30px; }
+        @media (min-width: 850px) { .manual-grid { grid-template-columns: 1fr 1fr; } }
+        .manual-sectie h3 { color: var(--celtic-green); border-bottom: 2px solid var(--celtic-green); padding-bottom: 8px; margin-top: 0; font-variant: small-caps; }
         .manual-sectie p, .manual-sectie li { line-height: 1.5; font-size: 0.95rem; margin-bottom: 10px; }
-        .disclaimer-box { 
-            background: rgba(0,0,0,0.05); 
-            padding: 15px; 
-            border-radius: 4px; 
-            border-left: 5px solid var(--griffin-red); 
-            margin: 20px 0;
-            font-size: 0.85rem;
-        }
+        .disclaimer-box { background: rgba(0,0,0,0.05); padding: 15px; border-radius: 4px; border-left: 5px solid var(--griffin-red); margin: 20px 0; font-size: 0.85rem; }
 
-        .container { 
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            width: 100%; 
-            max-width: 1100px; 
-        }
+        .container { display: grid; grid-template-columns: 1fr; gap: 25px; width: 100%; max-width: 1100px; }
+        @media (min-width: 768px) { .container { grid-template-columns: repeat(2, 1fr); align-items: stretch; } }
 
-        @media (min-width: 768px) {
-            .container { grid-template-columns: repeat(2, 1fr); align-items: stretch; }
-        }
-
-        .card {
-            background: var(--card-bg); 
-            padding: 25px; 
-            border-radius: 15px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.8); 
-            text-align: center;
-            border: 3px double var(--celtic-green);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            min-height: 560px;
-        }
-
-        .card.in-tune { border-color: var(--tune-success); box-shadow: 0 0 30px rgba(46, 204, 113, 0.5); }
+        .card { background: var(--card-bg); padding: 25px; border-radius: 15px; box-shadow: 0 15px 50px rgba(0,0,0,0.8); text-align: center; border: 3px double var(--celtic-green); display: flex; flex-direction: column; min-height: 580px; position: relative;}
+        .card.in-tune { border-color: var(--tune-success); box-shadow: 0 0 30px rgba(46, 204, 113, 0.4); }
         h2 { color: var(--griffin-orange); font-size: 1.1rem; margin-top: 0; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 12px; }
 
-        .vu-meter {
-            background: var(--paper);
-            border: 6px solid #3a2a1a;
-            border-radius: 10px 10px 50% 50%;
-            aspect-ratio: 16 / 9;
-            width: 100%;
-            max-width: 300px;
-            margin: 15px auto;
-            position: relative; 
-            overflow: hidden; 
-        }
-
-        .vu-needle {
-            width: 3px; height: 78%; background: var(--griffin-red);
-            position: absolute; bottom: -8%; left: 50%;
-            transform-origin: bottom center; 
-            transform: rotate(-50deg);
-            transition: transform 0.2s ease-out;
-            z-index: 10;
-        }
-
-        #noteDisplay { font-size: 3rem; font-weight: bold; color: #3a2a1a; position: absolute; bottom: 12%; width: 100%; }
-
-        .string-nodes { display: flex; justify-content: center; gap: 8px; margin: 15px 0; flex-wrap: wrap; }
-        .string-node {
-            width: 42px; height: 42px; border-radius: 50%; background: #111;
-            border: 2px solid var(--celtic-green); color: var(--paper);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; cursor: pointer; font-weight: bold;
-        }
-
-        .noise-toggle-container {
-            margin: 15px auto; display: flex; align-items: center; justify-content: center; gap: 10px;
-            background: #0f110f; padding: 10px 20px; border-radius: 50px; width: fit-content;
-        }
-        .mode-label { font-size: 0.75rem; font-weight: bold; opacity: 0.3; }
-        #noiseToggle:not(:checked) ~ .label-stil { opacity: 1; color: var(--text-light); }
-        #noiseToggle:checked ~ .label-kroeg { opacity: 1; color: var(--griffin-orange); }
-        #noiseToggle { width: 40px; accent-color: var(--griffin-orange); cursor: pointer; }
-
-        .display-text { font-size: 3.5rem; font-weight: bold; color: var(--griffin-orange); margin: 15px 0; font-family: monospace; }
+        .metro-container { position: relative; width: 220px; height: 220px; margin: 15px auto; display: flex; align-items: center; justify-content: center; }
+        #metroRing { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+        .ring-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 14; }
+        .ring-segment { fill: none; stroke-width: 14; stroke-linecap: round; opacity: 0.15; transition: opacity 0.05s, stroke 0.1s; }
+        .ring-segment.active { opacity: 1; filter: drop-shadow(0 0 12px currentColor); }
+        .display-text { font-size: 3.5rem; font-weight: bold; color: var(--griffin-orange); font-family: monospace; z-index: 2; }
         
-        select, input[type=range], input[type=text] {
-            width: 100%; padding: 12px; margin: 8px 0; border-radius: 6px;
-            background: #0f110f; color: var(--paper); border: 1px solid var(--griffin-orange);
-            accent-color: var(--griffin-orange);
-        }
+        .vol-label { font-size: 0.65rem; color: var(--griffin-orange); font-weight: bold; margin-bottom: 2px; display: block; text-align: left;}
 
-        button {
-            width: 100%; padding: 18px; border: none; border-radius: 8px;
-            font-size: 16px; font-weight: bold; color: white;
-            background: var(--celtic-green); cursor: pointer;
-            text-transform: uppercase;
-        }
+        .vu-meter { background: var(--paper); border: 6px solid #3a2a1a; border-radius: 10px 10px 50% 50%; aspect-ratio: 16 / 9; width: 100%; max-width: 300px; margin: 15px auto; position: relative; overflow: hidden; }
+        .vu-needle { width: 3px; height: 78%; background: var(--griffin-red); position: absolute; bottom: -8%; left: 50%; transform-origin: bottom center; transform: rotate(-50deg); transition: transform 0.1s ease-out; z-index: 10; }
+        #noteDisplay { font-size: 3rem; font-weight: bold; color: #3a2a1a; position: absolute; bottom: 12%; width: 100%; text-align: center; }
 
-        #sessionLog { margin: 15px 0; height: 160px; overflow-y: auto; background: rgba(0,0,0,0.3); border-radius: 5px; padding: 10px; }
-        .log-entry { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #333; font-size: 0.8rem; gap: 10px; }
-        
-        .log-btns { display: flex; gap: 6px; flex-shrink: 0; }
+        .string-nodes { display: flex; justify-content: center; gap: 6px; margin: 10px 0; flex-wrap: wrap; min-height: 42px; }
+        .string-node { width: 40px; height: 40px; border-radius: 50%; background: #111; border: 2px solid var(--celtic-green); color: var(--paper); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; cursor: pointer; font-weight: bold; transition: all 0.2s; }
+        .string-node.active-tone { border-color: var(--griffin-orange); box-shadow: 0 0 10px var(--griffin-orange); color: var(--griffin-orange); }
+
+        select, input[type=range], input[type=text] { width: 100%; padding: 10px; margin: 4px 0; border-radius: 6px; background: #0f110f; color: var(--paper); border: 1px solid var(--griffin-orange); }
+        button { width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; color: white; background: var(--celtic-green); cursor: pointer; text-transform: uppercase; margin-top: 5px;}
+
+        #sessionLog { margin: 10px 0; height: 160px; overflow-y: auto; background: rgba(0,0,0,0.3); border-radius: 5px; padding: 10px; text-align: left; }
+        .log-entry { display: flex; flex-direction: column; padding: 10px 0; border-bottom: 1px solid #333; gap: 8px; }
+        .log-row-top { display: flex; width: 100%; }
+        .log-row-bottom { display: flex; justify-content: flex-end; gap: 6px; width: 100%; }
+        .edit-name-input { background: transparent; border: 1px solid rgba(212, 142, 61, 0.3); color: var(--text-light); font-family: 'Georgia', serif; font-size: 0.85rem; padding: 4px 8px; width: 100%; border-radius: 4px; }
+
         .small-btn { padding: 6px 10px; font-size: 0.65rem; border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold; text-transform: uppercase; }
         .btn-play { background: var(--celtic-green); }
         .btn-save { background: #444; }
         .btn-del { background: var(--griffin-red); }
 
         #recordStatus { display: none; width: 60px; height: 5px; background: var(--griffin-orange); margin: 0 auto 10px auto; border-radius: 3px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
-
         footer { margin-top: 40px; padding: 20px; text-align: center; border-top: 1px solid #333; width: 100%; font-size: 0.9rem;}
-        footer a { color: var(--griffin-orange); text-decoration: none; font-weight: bold; }
     </style>
 </head>
 
 <body>
     <div class="header"><h1>The Doggy Few<br>Music Machine</h1></div>
-
     <button id="manualBtn">MANUAL</button>
 
     <div id="manualPanel">
@@ -206,34 +122,35 @@
                 <h3>📘 Handleiding (NL)</h3>
                 <p>Welkom bij de officiële Music Machine van <strong>The Doggy Few</strong>. Deze toolkit is ontworpen om je te ondersteunen bij repetities en live optredens.</p>
                 <ul>
-                    <li><strong>TDF Tuner:</strong> Kies je instrument in het menu. Gebruik de ronde knoppen om een referentietoon te horen. Klik op START voor de microfoon-modus. De naald reageert op je spel; streef naar het midden (0). Gebruik de <strong>KROEG stand</strong> bij veel omgevingslawaai.</li>
-                    <li><strong>TDF Live Recorder:</strong> Voer een tracknaam en locatie in. Klik op START om de opname te beginnen. Na het stoppen verschijnt de opname in de lijst. Gebruik <strong>PLAY</strong> om te luisteren, <strong>SAVE</strong> om het bestand lokaal op te slaan, en <strong>DEL</strong> om een opname te verwijderen.</li>
-                    <li><strong>TDF Metronoom:</strong> Kies je tempo en maatsoort (Reel, Jig, Slipjig of Waltz). De machine geeft een accent op de eerste tel.</li>
+                    <li><strong>TDF Tuner:</strong> Kies je instrument. Gebruik de ronde knoppen voor een referentietoon (1x klik = 2 sec, dubbelklik = constant klinken). Een klinkende noot stopt direct bij de volgende klik.</li>
+                    <li><strong>TDF Live Recorder:</strong> Klik op START voor de opname. Pas namen in het logboek direct aan. Gebruik <strong>SAVE</strong> voor lokale opslag.</li>
+                    <li><strong>TDF Metronoom:</strong> Kies tempo en maat (bijv. 4/4 Reel). De <strong>ring</strong> pulseert: Groen zijn hoofd- en sub-accenten, Oranje zijn tussentikken.</li>
                 </ul>
                 <div class="disclaimer-box">
                     <strong>Privacy & Veiligheid:</strong><br>
-                    • Alle audioverwerking gebeurt lokaal in je browser. Er worden geen gegevens naar een server verzonden.<br>
-                    • De applicatie heeft toestemming voor de microfoon nodig voor de tuner en recorder.<br>
-                    • Gebruik van deze applicatie is volledig op eigen risico.
+                    • Alle audioverwerking gebeurt lokaal. Geen dataverkeer naar servers.<br>
+                    • Microfoontoegang is vereist voor tuner en recorder.
                 </div>
-                <p>Wij zijn <strong>The Doggy Few Irish Party Music</strong> uit Groningen. We hopen dat deze tool je helpt! Vragen: <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
+                <p>Dit is een muzikaal kadootje en blijft ons eigendom. Je mag het gratis gebruiken en delen met anderen voor niet-commerciële activiteiten. Het leven is te kort voor valse noten of matige timing.</p>
+                <p>Hartelijke groet uit Groningen, Holland.</p>
+                <p>Wij zijn <strong>The Doggy Few Irish Party Music</strong>. Vragen: <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
             </div>
             
             <div class="manual-sectie">
                 <h3>📘 User Manual (EN)</h3>
-                <p>Welcome to the <strong>The Doggy Few</strong> Music Machine. A professional toolkit for musicians.</p>
+                <p>Welcome to the <strong>The Doggy Few</strong> Music Machine.</p>
                 <ul>
-                    <li><strong>TDF Tuner:</strong> Select your instrument. Use the string buttons for reference pitch or click START for microphone mode. Aim for the center (0). Use <strong>PUB mode</strong> for tuning in noisy environments.</li>
-                    <li><strong>TDF Live Recorder:</strong> Enter track name and location. Click START to begin. Use <strong>PLAY</strong> to review, <strong>SAVE</strong> to download the WAV file, and <strong>DEL</strong> to remove recordings.</li>
-                    <li><strong>TDF Metronome:</strong> Set your time signature (Reel, Jig, etc.) and adjust the tempo slider.</li>
+                    <li><strong>TDF Tuner:</strong> Select instrument. Use buttons for reference (1-click = 2s, double-click = infinite). Any click stops the tone.</li>
+                    <li><strong>TDF Live Recorder:</strong> Record locally. Track names in the log are editable.</li>
+                    <li><strong>TDF Metronome:</strong> Set signature (e.g., 4/4 Reel). <strong>Ring</strong> pulses: Green (Accents), Orange (Other).</li>
                 </ul>
                 <div class="disclaimer-box">
                     <strong>Legal & Privacy:</strong><br>
-                    • Privacy: All processing is local. No data is stored or sent to any server.<br>
-                    • Permission: Microphone access is required.<br>
-                    • Liability: Use is entirely at your own risk.
+                    • All processing is local. No data stored or sent.
                 </div>
-                <p>Based in Groningen, Holland. Contact us at: <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
+                <p>This is a musical gift and remains our property. You may use it for free and share it with others for non-commercial activities. Life is too short for false notes or poor timing.</p>
+                <p>Warm regards from Groningen, Holland.</p>
+                <p>We are <strong>The Doggy Few Irish Party Music</strong>. Contact: <a href="mailto:info@doggyfew.com">info@doggyfew.com</a></p>
             </div>
         </div>
     </div>
@@ -247,24 +164,47 @@
             </div>
             <select id="instrumentSelect"></select>
             <div class="string-nodes" id="stringNodes"></div>
-            <div class="noise-toggle-container">
-                <span class="mode-label label-stil">STIL</span>
-                <input type="checkbox" id="noiseToggle">
-                <span class="mode-label label-kroeg">KROEG</span>
+            <div style="display:flex; justify-content:center; align-items:center; gap:10px; margin: 10px 0;">
+                <span style="font-size:0.7rem; font-weight:bold; color:var(--griffin-orange);">KROEG STAND</span>
+                <input type="checkbox" id="noiseToggle" style="width:30px;">
             </div>
             <button id="tunerBtn">START TUNER</button>
         </div>
 
         <div class="card">
             <h2>TDF Metronoom</h2>
-            <div class="display-text" id="bpmText">110</div>
+            <div class="metro-container">
+                <svg id="metroRing" viewBox="0 0 100 100">
+                    <circle class="ring-bg" cx="50" cy="50" r="42"></circle>
+                    <g id="segmentsLayer"></g>
+                </svg>
+                <div class="display-text" id="bpmText">110</div>
+            </div>
             <input type="range" id="tempoSlider" min="40" max="220" value="110">
             <select id="timeSig">
-                <option value="4">4/4 Reel / Hornpipe</option>
-                <option value="6">6/8 Jig</option>
-                <option value="9">9/8 Slipjig</option>
+                <option value="2">2/4 Polka</option>
                 <option value="3">3/4 Waltz</option>
+                <option value="4">4/4 Reel</option>
+                <option value="4-dotted">4/4 Hornpipe (Dotted)</option>
+                <option value="6">6/8 Jig</option>
+                <option value="12">12/8 Slide</option>
+                <option value="9">9/8 Slipjig</option>
+                <option value="2-march">2/4 March</option>
             </select>
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                <div style="flex:1">
+                    <span class="vol-label">GELUID</span>
+                    <select id="soundType">
+                        <option value="wood">Woodblock</option>
+                        <option value="click">Click</option>
+                        <option value="beep">Beep</option>
+                    </select>
+                </div>
+                <div style="flex:1">
+                    <span class="vol-label">VOLUME</span>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+                </div>
+            </div>
             <button id="metroBtn">START</button>
         </div>
 
@@ -285,35 +225,86 @@
         </div>
     </div>
 
-    <footer>&copy; 2026 THE DOGGY FEW &bull; <a href="mailto:info@doggyfew.com">INFO@DOGGYFEW.COM</a></footer>
+    <footer>&copy; 2026 THE DOGGY FEW &bull; INFO@DOGGYFEW.COM</footer>
 
     <script>
-        const INSTRUMENTS = {
-            "Gitaar (Standaard)": [82.41, 110.0, 146.83, 196.0, 246.94, 329.63],
-            "Banjo (GDAE)": [196.0, 293.66, 440.0, 659.25],
-            "Bouzouki (GDAD)": [196.0, 146.83, 220.0, 293.66],
-            "Ukelele": [392.0, 261.63, 329.63, 440.0]
+        let audioCtx, analyser, dataArray, isTuning = false, lastNoteTime = 0, smoothedCents = -50, activeSource = null;
+        let metroTimer, isRunning = false, nextNoteTime = 0, currentStep = 0;
+        let mediaRecorder, audioChunks = [], isRecording = false, activeLogAudio = null;
+        let activeToneInfo = { source: null, gain: null, freq: null, timer: null, mode: null };
+
+        const INSTRUMENTS = { 
+            "Gitaar (Standaard)": [82.41, 110.0, 146.83, 196.0, 246.94, 329.63], 
+            "Banjo (GDAE)": [196.0, 293.66, 440.0, 659.25], 
+            "Bouzouki (GDAD)": [196.0, 146.83, 220.0, 293.66], 
+            "Ukelele": [392.0, 261.63, 329.63, 440.0] 
         };
         const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-        let audioCtx, analyser, dataArray, isTuning = false, lastNoteTime = 0, activeSource = null;
-        let metroTimer, isRunning = false, nextNoteTime = 0, currentBeat = 0;
-        let practiceTimer, timerSeconds = 1200, isTimerRunning = false;
-        let mediaRecorder, audioChunks = [], isRecording = false, activeLogAudio = null;
-        let smoothedCents = -50;
 
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioCtx.createAnalyser(); analyser.fftSize = 4096;
-                dataArray = new Float32Array(4096);
+        function initAudio() { 
+            if (!audioCtx) { 
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)(); 
+                analyser = audioCtx.createAnalyser(); 
+                analyser.fftSize = 2048; 
+                dataArray = new Float32Array(2048); 
+            } 
+            if (audioCtx.state === 'suspended') audioCtx.resume(); 
+        }
+
+        function stopActiveTone() {
+            if (activeToneInfo.source) {
+                try { activeToneInfo.source.stop(); } catch(e){}
+                activeToneInfo.source = null;
+                if (activeToneInfo.timer) clearTimeout(activeToneInfo.timer);
+                document.querySelectorAll('.string-node').forEach(n => n.classList.remove('active-tone'));
+                activeToneInfo.mode = null;
             }
-            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function updateStringNodes() {
+            const nodes = document.getElementById('stringNodes'); nodes.innerHTML = '';
+            const inst = document.getElementById('instrumentSelect').value;
+            INSTRUMENTS[inst].forEach(freq => {
+                let node = document.createElement('div'); node.className = 'string-node';
+                let h = 12 * Math.log2(freq / 440); node.textContent = NOTES[(Math.round(h) + 69) % 12];
+                let lastClick = 0;
+                node.onclick = () => {
+                    const now = Date.now();
+                    const isDoubleClick = (now - lastClick < 300);
+                    lastClick = now;
+                    initAudio();
+                    if (activeToneInfo.source) {
+                        stopActiveTone();
+                        if (activeToneInfo.freq === freq && !isDoubleClick) { activeToneInfo.freq = null; return; }
+                    }
+                    activeToneInfo.freq = freq;
+                    node.classList.add('active-tone');
+                    const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                    osc.type = 'triangle'; osc.frequency.value = freq;
+                    g.gain.setValueAtTime(0, audioCtx.currentTime);
+                    g.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.1);
+                    osc.connect(g); g.connect(audioCtx.destination);
+                    const tG = audioCtx.createGain(); osc.connect(tG); tG.connect(analyser);
+                    osc.start(); activeToneInfo.source = osc; activeToneInfo.gain = g;
+                    if (isDoubleClick) { activeToneInfo.mode = 'infinite'; } 
+                    else { 
+                        activeToneInfo.mode = 'timed';
+                        activeToneInfo.timer = setTimeout(() => {
+                            if(activeToneInfo.gain) activeToneInfo.gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+                            setTimeout(() => { if(activeToneInfo.freq === freq) stopActiveTone(); }, 500);
+                        }, 2000);
+                    }
+                    if (!isTuning) { isTuning = true; drawTuner(); }
+                };
+                nodes.appendChild(node);
+            });
         }
 
         function autoCorrelate(buf, sampleRate) {
-            const threshold = document.getElementById('noiseToggle').checked ? 0.05 : 0.015;
             let rms = 0; for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
-            rms = Math.sqrt(rms / buf.length); if (rms < threshold) return -1;
+            rms = Math.sqrt(rms / buf.length);
+            const threshold = document.getElementById('noiseToggle').checked ? 0.05 : 0.015;
+            if (rms < threshold) return -1;
             let c = new Float32Array(buf.length);
             for (let i = 0; i < buf.length; i++) { for (let j = 0; j < buf.length - i; j++) c[i] = c[i] + buf[j] * buf[j + i]; }
             let d = 0; while (c[d] > c[d + 1]) d++;
@@ -324,21 +315,20 @@
 
         function drawTuner() {
             if (!isTuning) return;
-            analyser.getFloatTimeDomainData(dataArray); 
+            analyser.getFloatTimeDomainData(dataArray);
             let freq = autoCorrelate(dataArray, audioCtx.sampleRate);
             const needle = document.getElementById('needle');
             const nDisplay = document.getElementById('noteDisplay');
             if (freq > 0) {
                 lastNoteTime = Date.now();
-                let targetFreqs = INSTRUMENTS[document.getElementById('instrumentSelect').value];
-                let closest = targetFreqs.reduce((a, b) => Math.abs(b - freq) < Math.abs(a - freq) ? b : a);
+                let targets = INSTRUMENTS[document.getElementById('instrumentSelect').value] || INSTRUMENTS["Gitaar (Standaard)"];
+                let closest = targets.reduce((a, b) => Math.abs(b - freq) < Math.abs(a - freq) ? b : a);
                 let centsOff = 1200 * Math.log2(freq / closest);
-                smoothedCents = (smoothedCents * 0.7) + (centsOff * 0.3);
+                smoothedCents = (smoothedCents * 0.8) + (centsOff * 0.2);
                 needle.style.transform = `rotate(${Math.max(-50, Math.min(50, smoothedCents)) * 0.9}deg)`;
                 nDisplay.textContent = NOTES[(Math.round(12 * Math.log2(closest / 440)) + 69) % 12];
                 document.getElementById('tunerCard').classList.toggle('in-tune', Math.abs(centsOff) < 4);
             } else if (Date.now() - lastNoteTime > 800) {
-                smoothedCents = -50;
                 needle.style.transform = `rotate(-50deg)`; nDisplay.textContent = "-";
                 document.getElementById('tunerCard').classList.remove('in-tune');
             }
@@ -347,79 +337,97 @@
 
         document.getElementById('tunerBtn').onclick = async () => {
             initAudio(); if (!isTuning) {
-                try {
-                    const s = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    audioCtx.createMediaStreamSource(s).connect(analyser);
-                    isTuning = true; drawTuner(); document.getElementById('tunerBtn').textContent = "STOP";
+                try { const s = await navigator.mediaDevices.getUserMedia({ audio: true }); audioCtx.createMediaStreamSource(s).connect(analyser); isTuning = true; drawTuner(); document.getElementById('tunerBtn').textContent = "STOP";
                 } catch (e) { alert("Mic nodig."); }
-            } else { isTuning = false; document.getElementById('tunerBtn').textContent = "START"; }
+            } else { isTuning = false; document.getElementById('tunerBtn').textContent = "START TUNER"; }
         };
-
-        function updateStringNodes() {
-            const nodes = document.getElementById('stringNodes'); nodes.innerHTML = '';
-            INSTRUMENTS[document.getElementById('instrumentSelect').value].forEach(freq => {
-                let node = document.createElement('div'); node.className = 'string-node';
-                let h = 12 * Math.log2(freq / 440); node.textContent = NOTES[(Math.round(h) + 69) % 12];
-                node.onclick = () => {
-                    initAudio(); if (activeSource) activeSource.stop();
-                    const osc = audioCtx.createOscillator(); const g = audioCtx.createGain(); const tG = audioCtx.createGain();
-                    osc.type = 'triangle'; osc.frequency.value = freq;
-                    g.gain.setValueAtTime(0, audioCtx.currentTime);
-                    g.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.1);
-                    g.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 2);
-                    osc.connect(g); g.connect(audioCtx.destination);
-                    osc.connect(tG); tG.connect(analyser);
-                    osc.start(); osc.stop(audioCtx.currentTime + 2); activeSource = osc;
-                    if (!isTuning) { isTuning = true; drawTuner(); }
-                };
-                nodes.appendChild(node);
-            });
-        }
 
         document.getElementById('recBtn').onclick = async () => {
             initAudio(); if (!isRecording) {
-                const s = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(s); audioChunks = [];
-                document.getElementById('recordStatus').style.display = 'block';
-                mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-                mediaRecorder.onstop = () => {
-                    document.getElementById('recordStatus').style.display = 'none';
-                    const blob = new Blob(audioChunks, { type: 'audio/wav' }); const url = URL.createObjectURL(blob);
-                    const log = document.getElementById('logContent'); if (log.innerHTML.includes('Geen opnames')) log.innerHTML = '';
-                    const name = document.getElementById('recordName').value || "Opname";
-                    const loc = document.getElementById('recordLocation').value || "Live";
-                    const entry = document.createElement('div'); entry.className = 'log-entry';
-                    entry.innerHTML = `<span>• ${name} (${loc})</span><div class="log-btns"><button class="small-btn btn-play">PLAY</button><button class="small-btn btn-save">SAVE</button><button class="small-btn btn-del">DEL</button></div>`;
-                    let a = new Audio(url);
-                    entry.querySelector('.btn-play').onclick = function() { if (activeLogAudio && !a.paused) { a.pause(); this.textContent = "PLAY"; } else { if (activeLogAudio) activeLogAudio.pause(); a.play(); this.textContent = "STOP"; activeLogAudio = a; a.onended=()=>this.textContent="PLAY";} };
-                    entry.querySelector('.btn-save').onclick = () => { const link = document.createElement('a'); link.href = url; link.download = `${name}_${loc}.wav`; link.click(); };
-                    entry.querySelector('.btn-del').onclick = () => { if(confirm("Opname verwijderen?")) entry.remove(); };
-                    log.prepend(entry);
-                };
-                mediaRecorder.start(); isRecording = true; document.getElementById('recBtn').textContent = "STOP";
+                try { const s = await navigator.mediaDevices.getUserMedia({ audio: true }); mediaRecorder = new MediaRecorder(s); audioChunks = [];
+                    document.getElementById('recordStatus').style.display = 'block';
+                    mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+                    mediaRecorder.onstop = () => {
+                        document.getElementById('recordStatus').style.display = 'none';
+                        const blob = new Blob(audioChunks, { type: 'audio/wav' }); const url = URL.createObjectURL(blob);
+                        const log = document.getElementById('logContent'); if (log.innerHTML.includes('Geen opnames')) log.innerHTML = '';
+                        const defaultName = document.getElementById('recordName').value || "Track";
+                        const loc = document.getElementById('recordLocation').value || "Live";
+                        const entry = document.createElement('div'); entry.className = 'log-entry';
+                        entry.innerHTML = `<div class="log-row-top"><input type="text" class="edit-name-input" value="${defaultName} (${loc})"></div><div class="log-row-bottom"><button class="small-btn btn-play">PLAY</button><button class="small-btn btn-save">SAVE</button><button class="small-btn btn-del">DEL</button></div>`;
+                        let a = new Audio(url);
+                        entry.querySelector('.btn-play').onclick = function() { if (activeLogAudio && !a.paused) { a.pause(); this.textContent = "PLAY"; } else { if (activeLogAudio) activeLogAudio.pause(); a.play(); this.textContent = "STOP"; activeLogAudio = a; a.onended=()=>this.textContent="PLAY"; } };
+                        entry.querySelector('.btn-save').onclick = () => { const curName = entry.querySelector('.edit-name-input').value; const link = document.createElement('a'); link.href = url; link.download = `${curName}.wav`; link.click(); };
+                        entry.querySelector('.btn-del').onclick = () => { if(confirm("Wissen?")) entry.remove(); };
+                        log.prepend(entry);
+                    };
+                    mediaRecorder.start(); isRecording = true; document.getElementById('recBtn').textContent = "STOP";
+                } catch (e) { alert("Mic nodig."); }
             } else { mediaRecorder.stop(); isRecording = false; document.getElementById('recBtn').textContent = "START OPNAME"; }
         };
 
-        document.getElementById('metroBtn').onclick = () => { initAudio(); isRunning = !isRunning; if(isRunning) { nextNoteTime = audioCtx.currentTime; metroStep(); document.getElementById('metroBtn').textContent="STOP"; } else { clearTimeout(metroTimer); document.getElementById('metroBtn').textContent="START"; } };
-        function metroStep() { 
-            while (nextNoteTime < audioCtx.currentTime + 0.1) { 
-                const sig = parseInt(document.getElementById('timeSig').value);
-                const osc = audioCtx.createOscillator(); const g = audioCtx.createGain(); 
-                osc.frequency.value = (currentBeat === 0) ? 1000 : 600; 
-                g.gain.setValueAtTime(0.1, nextNoteTime); g.gain.exponentialRampToValueAtTime(0.001, nextNoteTime+0.05); 
-                osc.connect(g); g.connect(audioCtx.destination); osc.start(nextNoteTime); osc.stop(nextNoteTime+0.05); 
-                nextNoteTime += 60.0/parseInt(document.getElementById('tempoSlider').value); currentBeat = (currentBeat+1)%sig; 
-            } 
-            metroTimer = setTimeout(metroStep, 25); 
+        function setupRing() {
+            const container = document.getElementById('segmentsLayer'); container.innerHTML = '';
+            const sig = document.getElementById('timeSig').value;
+            let count = (sig === '2' || sig === '2-march' || sig === '12') ? 12 : (sig === '9' ? 9 : (sig === '6' ? 6 : (sig === '3' ? 3 : 4)));
+            const radius = 42; const circ = 2 * Math.PI * radius;
+            for (let i = 0; i < count; i++) {
+                const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                c.setAttribute("cx", 50); c.setAttribute("cy", 50); c.setAttribute("r", radius);
+                c.classList.add("ring-segment");
+                c.style.strokeDasharray = `${(circ/count)-3} ${circ}`;
+                c.style.strokeDashoffset = -((circ/count)*i);
+                let color = 'var(--griffin-orange)';
+                if (i === 0) color = '#2ecc71'; 
+                else if ((sig === '6' || sig === '12' || sig === '9') && i % 3 === 0) color = '#2ecc71'; 
+                else if (sig === '4' && i === 2) color = '#2ecc71'; 
+                c.style.stroke = color; c.id = `seg-${i}`; container.appendChild(c);
+            }
         }
 
-        document.getElementById('timerBtn').onclick = () => { initAudio(); isTimerRunning = !isTimerRunning; if(isTimerRunning) { practiceTimer = setInterval(() => { timerSeconds--; updateT(); }, 1000); document.getElementById('timerBtn').textContent="STOP"; } else { clearInterval(practiceTimer); document.getElementById('timerBtn').textContent="START SESSIE"; } };
-        function updateT() { let m = Math.floor(timerSeconds/60); let s = timerSeconds%60; document.getElementById('timerDisplay').textContent = `${m}:${s.toString().padStart(2,'0')}`; if(timerSeconds<=0){ clearInterval(practiceTimer); isTimerRunning=false; document.getElementById('timerBtn').textContent="START SESSIE"; alert("Tijd is om!"); } }
+        function playClick(time, freq, isAccent) {
+            const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
+            const type = document.getElementById('soundType').value;
+            const vol = document.getElementById('volumeSlider').value;
+            if(type === 'wood') { osc.type = 'square'; g.gain.exponentialRampToValueAtTime(0.001, time + 0.08); }
+            else if(type === 'click') { osc.type = 'triangle'; g.gain.exponentialRampToValueAtTime(0.001, time + 0.04); }
+            else { osc.type = 'sine'; g.gain.exponentialRampToValueAtTime(0.001, time + 0.1); }
+            osc.frequency.setValueAtTime(isAccent ? freq * 1.2 : freq, time);
+            g.gain.setValueAtTime(0.3 * vol, time);
+            osc.connect(g); g.connect(audioCtx.destination); osc.start(time); osc.stop(time + 0.1);
+        }
+
+        function metroStep() {
+            while (isRunning && nextNoteTime < audioCtx.currentTime + 0.1) {
+                const sig = document.getElementById('timeSig').value;
+                const bpm = parseInt(document.getElementById('tempoSlider').value);
+                const stepDur = (sig === '2' || sig === '2-march') ? (60/bpm)/6 : (['6','9','12'].includes(sig) ? (60/bpm)/3 : 60/bpm);
+                document.querySelectorAll('.ring-segment').forEach(s => s.classList.remove('active'));
+                if(sig === '2' || sig === '2-march') {
+                    const seg = document.getElementById(`seg-${currentStep}`); if(seg) seg.classList.add('active');
+                    if(currentStep === 0) playClick(nextNoteTime, 800, true); if(currentStep === 6) playClick(nextNoteTime, 600, false);
+                    nextNoteTime += stepDur; currentStep = (currentStep + 1) % 12;
+                } else if(['6','9','12'].includes(sig)) {
+                    const seg = document.getElementById(`seg-${currentStep}`); if(seg) seg.classList.add('active');
+                    if(currentStep % 3 === 0) playClick(nextNoteTime, 800, currentStep === 0);
+                    nextNoteTime += stepDur; currentStep = (currentStep + 1) % parseInt(sig);
+                } else {
+                    const seg = document.getElementById(`seg-${currentStep}`); if(seg) seg.classList.add('active');
+                    playClick(nextNoteTime, 800, currentStep === 0);
+                    nextNoteTime += (sig==='4-dotted' ? (currentStep%2===0?0.75:0.25)*(60/bpm)*2 : 60/bpm);
+                    currentStep = (currentStep + 1) % (sig==='4-dotted'?4:parseInt(sig));
+                }
+            }
+            if(isRunning) metroTimer = setTimeout(metroStep, 25);
+        }
+
+        document.getElementById('metroBtn').onclick = () => { initAudio(); isRunning = !isRunning; if(isRunning) { nextNoteTime = audioCtx.currentTime; currentStep = 0; metroStep(); document.getElementById('metroBtn').textContent="STOP"; } else { clearTimeout(metroTimer); document.getElementById('metroBtn').textContent="START"; } };
+        document.getElementById('timeSig').onchange = setupRing;
+        document.getElementById('tempoSlider').oninput = () => document.getElementById('bpmText').textContent = tempoSlider.value;
         document.getElementById('manualBtn').onclick = () => { const p = document.getElementById('manualPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; };
-        document.getElementById('tempoSlider').oninput = () => document.getElementById('bpmText').textContent = document.getElementById('tempoSlider').value;
-        document.getElementById('timerSlider').oninput = function() { timerSeconds = this.value * 60; updateT(); };
+        document.getElementById('instrumentSelect').onchange = updateStringNodes;
         Object.keys(INSTRUMENTS).forEach(inst => { let opt = document.createElement('option'); opt.value = inst; opt.textContent = inst; instrumentSelect.appendChild(opt); });
-        instrumentSelect.onchange = updateStringNodes; updateStringNodes();
+        setupRing(); updateStringNodes();
     </script>
 </body>
 </html>
