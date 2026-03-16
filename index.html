@@ -28,6 +28,7 @@
         .card { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 3px double var(--celtic-green); text-align: center; display: flex; flex-direction: column; min-height: 640px; box-shadow: 0 15px 50px rgba(0,0,0,0.8); position: relative; }
         h2 { color: var(--griffin-orange); text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 12px; font-size: 1.1rem; margin-top: 0; }
 
+        /* Sliders v12.7 premium look */
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 20px 0; cursor: pointer; }
         input[type=range]::-webkit-slider-runnable-track { height: 12px; background: rgba(0,0,0,0.5); border-radius: 6px; border: 1px solid #444; }
         input[type=range]::-moz-range-track { height: 12px; background: rgba(0,0,0,0.5); border-radius: 6px; border: 1px solid #444; }
@@ -86,11 +87,11 @@
                 <p>Welkom bij de Music Machine van <strong>The Doggy Few</strong>. Deze toolkit is ontwikkeld voor repetities en live sessies.</p>
                 <p><strong>TDF Tuner:</strong> Kies je instrument (Gitaar, Banjo, Bouzouki, Viool of Ukelele). E&euml;n klik op een snaar geeft 2 seconden geluid met een zachte fade-out. Dubbelklik voor een constante loop. Klik nogmaals om het geluid direct te stoppen. Gebruik de <strong>Kroeg Stand</strong> om de gevoeligheid van de meter aan te passen in luidruchtige omgevingen.</p>
                 <p><strong>TDF Time Machine:</strong> De ultieme oefenpartner. Het display toont de resterende <strong>Timer</strong> en het actuele <strong>BPM</strong>. Gebruik de <strong>TAP TEMPO</strong> knop om een ritme in te tikken.</p>
+                
                 <p><strong>Speed Trainer (Versneller):</strong> Bouw je techniek stapsgewijs op zonder de flow te breken. Je hebt twee opties:</p>
-                <ul>
-                    <li><strong>Interval: Timer</strong> &ndash; Het tempo blijft constant gedurende de ingestelde tijd. Zodra de timer afloopt hoor je een signaal, wordt het tempo verhoogd (+5% of +10%) en start de timer opnieuw.</li>
-                    <li><strong>Interval: Maten (4, 8 of 16)</strong> &ndash; De machine telt de maten. Na elk gekozen aantal maten hoor je een korte 'beep' en versnelt de machine direct. Ideaal om een lastig loopje langzaam te starten en vloeiend naar topsnelheid te brengen.</li>
-                </ul>
+                <p><em>1. Interval: Timer</em> &ndash; Het tempo blijft constant gedurende de ingestelde tijd op de slider. Zodra de timer afloopt hoor je een signaal, wordt het tempo verhoogd (+5% of +10%) en start de timer direct opnieuw voor de volgende ronde. Ideaal voor lange conditietraining.</p>
+                <p><em>2. Interval: Maten (4, 8 of 16)</em> &ndash; De machine telt de maten. Na elk gekozen aantal maten hoor je een korte 'beep' en versnelt de machine direct. Dit is ideaal om een lastig loopje langzaam te starten en vloeiend naar topsnelheid te brengen zonder te stoppen.</p>
+                
                 <p><strong>TDF Recording Machine:</strong> Voer een tracknaam en locatie in en klik op <strong>START OPNAME</strong>. Gebruik <strong>SAVE</strong> om het bestand als .wav definitief op te slaan.</p>
                 
                 <h4>Ritme Training &amp; Ezelsbruggetjes:</h4>
@@ -110,11 +111,11 @@
                 <p>Welcome to <strong>The Doggy Few</strong> Music Machine. Toolkit for professional rehearsal stability.</p>
                 <p><strong>TDF Tuner:</strong> Select instrument. Single click for 2s tone, double click for loop. Use <strong>Kroeg Stand</strong> (Pub Mode) for noisy rooms.</p>
                 <p><strong>TDF Time Machine:</strong> Displays <strong>Timer</strong> and active <strong>BPM</strong>. Use the <strong>TAP TEMPO</strong> button to set the beat manually.</p>
+                
                 <p><strong>Speed Trainer:</strong> Increases your technical speed step-by-step without stopping the beat. Two modes available:</p>
-                <ul>
-                    <li><strong>Interval: Timer</strong> &ndash; Tempo remains constant for the duration set. When time is up, the tempo increases (+5% or +10%) and the timer resets.</li>
-                    <li><strong>Interval: Bars (4, 8, or 16)</strong> &ndash; The machine counts every bar. After the selected number of bars, you'll hear a short beep and the tempo speeds up instantly. Ideal for building up a difficult riff.</li>
-                </ul>
+                <p><em>1. Interval: Timer</em> &ndash; Tempo remains constant for the duration set. When time is up, you'll hear a signal, the tempo increases (+5% or +10%) and the timer resets. Perfect for endurance practice.</p>
+                <p><em>2. Interval: Bars (4, 8, or 16)</em> &ndash; The machine counts every bar. After the selected number of bars, you'll hear a short beep and the tempo speeds up instantly. Perfect for building up a difficult riff smoothly.</p>
+                
                 <p><strong>TDF Recording Machine:</strong> Enter track name and location, then press <strong>START OPNAME</strong>. Use <strong>SAVE</strong> to download files as .wav.</p>
                 <p><strong>Ownership:</strong> All intellectual property rights remain the sole property of <strong>Lucas Sterk</strong> and <strong>The Doggy Few</strong>.</p>
                 <p style="font-style: italic; margin-top: 15px;">Because life is too short for out-of-tune notes or bad timing.. :)</p>
@@ -194,6 +195,7 @@
 
         function initAudio() { if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); analyser = audioCtx.createAnalyser(); analyser.fftSize = 2048; dataArray = new Float32Array(2048); } if(audioCtx.state === 'suspended') audioCtx.resume(); }
 
+        // --- TUNER ---
         function autoCorrelate(buf, rate) {
             let rms = 0; for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
             rms = Math.sqrt(rms / buf.length);
@@ -235,6 +237,7 @@
             } else { isTuning = false; document.getElementById('tunerBtn').textContent = "START TUNER"; }
         };
 
+        // --- TIME MACHINE ---
         function applySpeedIncrease() {
             const step = parseFloat(document.getElementById('speedStep').value);
             if(step > 0) {
