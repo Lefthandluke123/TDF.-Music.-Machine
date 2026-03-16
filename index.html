@@ -28,11 +28,10 @@
         .card { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 3px double var(--celtic-green); text-align: center; display: flex; flex-direction: column; min-height: 640px; box-shadow: 0 15px 50px rgba(0,0,0,0.8); position: relative; }
         h2 { color: var(--griffin-orange); text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 12px; font-size: 1.1rem; margin-top: 0; }
 
-        /* Sliders v12.7 premium look */
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 20px 0; cursor: pointer; }
         input[type=range]::-webkit-slider-runnable-track { height: 12px; background: rgba(0,0,0,0.5); border-radius: 6px; border: 1px solid #444; }
         input[type=range]::-moz-range-track { height: 12px; background: rgba(0,0,0,0.5); border-radius: 6px; border: 1px solid #444; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 28px; width: 28px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--paper), var(--griffin-orange)); border: 3px solid #121212; margin-top: -9px; box-shadow: 0 4px 6px rgba(0,0,0,0.4); transition: transform 0.1s, box-shadow 0.1s; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 28px; width: 28px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--paper), var(--griffin-orange)); border: 3px solid #121212; margin-top: -9px; box-shadow: 0 4px 6px rgba(0,0,0,0.4); transition: transform 0.1s; }
         input[type=range]:active::-webkit-slider-thumb { transform: scale(1.2); box-shadow: 0 0 15px var(--griffin-orange); }
 
         .string-node { width: 52px; height: 52px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #4a3a2a, #2a1a0a); border: 2px solid #3a2a1a; color: var(--paper); display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.6); transition: all 0.2s; user-select: none; font-family: monospace; font-size: 1.2rem; }
@@ -40,10 +39,6 @@
 
         .ring-segment { transition: opacity 0.1s, stroke-width 0.1s; opacity: 0.15; }
         .ring-segment.active { opacity: 1; stroke-width: 16; }
-
-        #recLight { height: 6px; width: 100%; background: var(--griffin-orange); margin: 10px 0; border-radius: 3px; opacity: 0; transition: opacity 0.3s; }
-        .recording-active #recLight { opacity: 1; animation: breathe 1.5s infinite ease-in-out; box-shadow: 0 0 15px var(--griffin-orange); }
-        @keyframes breathe { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
 
         .vu-meter { background: var(--paper); border: 6px solid #3a2a1a; border-radius: 10px 10px 50% 50%; aspect-ratio: 16 / 9; width: 100%; max-width: 250px; margin: 15px auto; position: relative; overflow: hidden; }
         .vu-needle { width: 4px; height: 80%; background: var(--griffin-red); position: absolute; bottom: -5%; left: 50%; transform-origin: bottom center; transform: rotate(-50deg); transition: transform 0.05s ease-out; z-index: 10; }
@@ -53,15 +48,7 @@
         .sub-display { font-size: 1.2rem; font-weight: bold; color: var(--text-light); margin-top: 5px; }
 
         input[type=text], .custom-select { width: 100%; padding: 12px; margin: 5px 0 10px 0; background: #0f110f; color: var(--paper); border: 1px solid var(--griffin-orange); border-radius: 6px; }
-        button { width: 100%; padding: 18px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; color: white; background: var(--celtic-green); cursor: pointer; text-transform: uppercase; transition: transform 0.1s; }
-        button:active { transform: scale(0.98); }
-        
-        #tapBtn { background: #3a3a3a; border: 2px solid var(--griffin-orange); color: var(--griffin-orange); margin-top: 10px; }
-        #tapBtn.active { background: var(--griffin-orange); color: #121212; box-shadow: 0 0 15px var(--griffin-orange); }
-
-        .log-entry { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; border-left: 4px solid var(--griffin-orange); text-align: left; }
-        .log-input-edit { background: #0f110f; color: var(--paper); border: 1px solid #444; padding: 6px; border-radius: 4px; font-size: 0.8rem; width: 100%; }
-        .small-btn { padding: 8px; font-size: 0.7rem; width: auto; flex: 1; }
+        button { width: 100%; padding: 18px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; color: white; background: var(--celtic-green); cursor: pointer; text-transform: uppercase; }
 
         .manual-section { margin-bottom: 25px; border-bottom: 1px solid rgba(45, 90, 39, 0.2); padding-bottom: 15px; }
         .manual-section h4 { color: var(--celtic-green); text-transform: uppercase; margin-top: 15px; margin-bottom: 10px; }
@@ -85,6 +72,9 @@
             <div class="manual-section">
                 <h4>Handleiding</h4>
                 <p>Welkom bij de Music Machine van <strong>The Doggy Few</strong>. Deze toolkit is ontwikkeld voor repetities en live sessies.</p>
+                <p><strong>Het gebruik van deze app is ons kadootje aan jou.</strong></p>
+                <p>Wil je meer weten over The Doggy Few Irish Party Music? Kijk dan op <a href="https://www.doggyfew.com" target="_blank" style="color:var(--celtic-green); font-weight:bold;">www.doggyfew.com</a></p>
+                
                 <p><strong>TDF Tuner:</strong> Kies je instrument (Gitaar, Banjo, Bouzouki, Viool of Ukelele). E&euml;n klik op een snaar geeft 2 seconden geluid met een zachte fade-out. Dubbelklik voor een constante loop. Klik nogmaals om het geluid direct te stoppen. Gebruik de <strong>Kroeg Stand</strong> om de gevoeligheid van de meter aan te passen in luidruchtige omgevingen.</p>
                 <p><strong>TDF Time Machine:</strong> De ultieme oefenpartner. Het display toont de resterende <strong>Timer</strong> en het actuele <strong>BPM</strong>. Gebruik de <strong>TAP TEMPO</strong> knop om een ritme in te tikken.</p>
                 
@@ -102,13 +92,16 @@
                     <tr><td>4/4 Reel</td><td>Blackberry Strawberry</td></tr>
                 </table>
 
-                <p><strong>Kadootje &amp; Eigendom:</strong> Deze software is ons kadootje aan de community. Het gebruik is gratis, maar de software en alle intellectuele <strong>eigendomsrechten</strong> blijven volledig eigendom van <strong>Lucas Sterk</strong> en <strong>The Doggy Few</strong>.</p>
+                <p><strong>Eigendom:</strong> Deze software is ons kadootje aan de community. Het gebruik is gratis, maar de software en alle intellectuele <strong>eigendomsrechten</strong> blijven volledig eigendom van <strong>Lucas Sterk</strong> en <strong>The Doggy Few</strong>.</p>
                 <p style="font-style: italic; margin-top: 15px;">Het leven is immers te kort voor valse noten en matige timing.. :)</p>
             </div>
 
             <div class="manual-section">
                 <h4>User Manual</h4>
                 <p>Welcome to <strong>The Doggy Few</strong> Music Machine. Toolkit for professional rehearsal stability.</p>
+                <p><strong>The use of this app is our present to you.</strong></p>
+                <p>Want to know more about The Doggy Few Irish Party Music? Visit <a href="https://www.doggyfew.com" target="_blank" style="color:var(--celtic-green); font-weight:bold;">www.doggyfew.com</a></p>
+
                 <p><strong>TDF Tuner:</strong> Select instrument. Single click for 2s tone, double click for loop. Use <strong>Kroeg Stand</strong> (Pub Mode) for noisy rooms.</p>
                 <p><strong>TDF Time Machine:</strong> Displays <strong>Timer</strong> and active <strong>BPM</strong>. Use the <strong>TAP TEMPO</strong> button to set the beat manually.</p>
                 
@@ -161,8 +154,19 @@
                 <option value="4">4/4 Reel</option><option value="6">6/8 Jig</option><option value="2">2/4 Polka</option><option value="3">3/4 Waltz</option><option value="9">9/8 Slipjig</option>
             </select>
 
-            <div style="display:flex; gap:10px; margin:10px 0;">
+            <div style="display:flex; gap:10px; margin:5px 0;">
                 <div style="flex:1"><span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; text-align: left;">Timer (Min)</span><input type="range" id="timerSlider" min="1" max="60" value="20"></div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin:10px 0;">
+                <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:6px; flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border: 1px solid #333;">
+                    <label style="font-size:0.7rem; color:var(--griffin-orange); font-weight:bold;">METRO</label>
+                    <input type="checkbox" id="metroActive" checked style="accent-color:var(--griffin-orange); width:18px; height:18px;">
+                </div>
+                <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:6px; flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border: 1px solid #333;">
+                    <label style="font-size:0.7rem; color:var(--griffin-orange); font-weight:bold;">TIMER</label>
+                    <input type="checkbox" id="timerActive" checked style="accent-color:var(--griffin-orange); width:18px; height:18px;">
+                </div>
             </div>
 
             <div style="display:flex; gap:10px; margin-top:10px;">
@@ -174,7 +178,7 @@
 
         <div class="card" id="recorderCard">
             <h2>TDF Recording Machine</h2>
-            <div id="recLight"></div>
+            <div id="recLight" style="height: 6px; width: 100%; background: var(--griffin-orange); margin: 10px 0; border-radius: 3px; opacity: 0; transition: opacity 0.3s;"></div>
             <input type="text" id="locField" placeholder="Locatie">
             <input type="text" id="trackField" placeholder="Tracknaam">
             <div id="sessionLog" style="height:160px; overflow-y:auto; background:rgba(0,0,0,0.3); border-radius:5px; padding:10px; margin-top:15px; color: var(--text-light); font-size: 0.8rem;"><i>Logboek leeg...</i></div>
@@ -195,7 +199,6 @@
 
         function initAudio() { if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); analyser = audioCtx.createAnalyser(); analyser.fftSize = 2048; dataArray = new Float32Array(2048); } if(audioCtx.state === 'suspended') audioCtx.resume(); }
 
-        // --- TUNER ---
         function autoCorrelate(buf, rate) {
             let rms = 0; for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
             rms = Math.sqrt(rms / buf.length);
@@ -237,14 +240,21 @@
             } else { isTuning = false; document.getElementById('tunerBtn').textContent = "START TUNER"; }
         };
 
-        // --- TIME MACHINE ---
+        function updateDisplays() {
+            const bpm = document.getElementById('tempoSlider').value;
+            document.getElementById('bpmDisp').textContent = bpm + " BPM";
+            if (document.getElementById('timerActive').checked) {
+                const m = Math.floor(practiceTimeLeft / 60); const s = practiceTimeLeft % 60;
+                document.getElementById('timerDisp').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+            } else { document.getElementById('timerDisp').textContent = bpm; }
+        }
+
         function applySpeedIncrease() {
             const step = parseFloat(document.getElementById('speedStep').value);
             if(step > 0) {
                 const cur = parseInt(document.getElementById('tempoSlider').value);
                 const newBpm = Math.min(220, Math.round(cur * (1 + step)));
-                document.getElementById('tempoSlider').value = newBpm;
-                document.getElementById('bpmDisp').textContent = newBpm + " BPM";
+                document.getElementById('tempoSlider').value = newBpm; updateDisplays();
                 const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
                 osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
                 g.gain.setValueAtTime(0.1, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
@@ -257,10 +267,12 @@
             while (nextNoteTime < audioCtx.currentTime + 0.1) {
                 const sig = parseInt(document.getElementById('timeSig').value);
                 const bpm = document.getElementById('tempoSlider').value;
-                const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
-                osc.frequency.setValueAtTime(currentStep === 0 ? 1000 : 800, nextNoteTime);
-                g.gain.setValueAtTime(0.2, nextNoteTime); g.gain.exponentialRampToValueAtTime(0.001, nextNoteTime + 0.05);
-                osc.connect(g); g.connect(audioCtx.destination); osc.start(nextNoteTime); osc.stop(nextNoteTime + 0.1);
+                if (document.getElementById('metroActive').checked) {
+                    const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                    osc.frequency.setValueAtTime(currentStep === 0 ? 1000 : 800, nextNoteTime);
+                    g.gain.setValueAtTime(0.2, nextNoteTime); g.gain.exponentialRampToValueAtTime(0.001, nextNoteTime + 0.05);
+                    osc.connect(g); g.connect(audioCtx.destination); osc.start(nextNoteTime); osc.stop(nextNoteTime + 0.1);
+                }
                 const segments = document.querySelectorAll('.ring-segment');
                 segments.forEach((s, i) => s.classList.toggle('active', i === currentStep));
                 nextNoteTime += 60 / bpm;
@@ -282,10 +294,8 @@
                 document.getElementById('pauseBtn').style.display = "block";
                 nextNoteTime = audioCtx.currentTime; setupRing(); metroTick();
                 practiceInterval = setInterval(() => {
-                    if(!isPaused) {
-                        practiceTimeLeft--; 
-                        const m = Math.floor(practiceTimeLeft / 60); const s = practiceTimeLeft % 60;
-                        document.getElementById('timerDisp').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+                    if(!isPaused && document.getElementById('timerActive').checked) {
+                        practiceTimeLeft--; updateDisplays();
                         if(practiceTimeLeft <= 0) {
                             if (document.getElementById('speedInterval').value === "timer") applySpeedIncrease();
                             practiceTimeLeft = parseInt(document.getElementById('timerSlider').value) * 60;
@@ -297,6 +307,7 @@
                 this.textContent = "START"; this.style.background = "var(--celtic-green)";
                 document.getElementById('pauseBtn').style.display = "none";
                 document.querySelectorAll('.ring-segment').forEach(s => s.classList.remove('active'));
+                practiceTimeLeft = parseInt(document.getElementById('timerSlider').value) * 60; updateDisplays();
             }
         };
 
@@ -306,10 +317,8 @@
             if (tapTimes.length > 0 && now - tapTimes[tapTimes.length - 1] > 3000) tapTimes = [];
             tapTimes.push(now);
             if (tapTimes.length > 1) {
-                const intervals = [];
-                for (let i = 1; i < tapTimes.length; i++) intervals.push(tapTimes[i] - tapTimes[i-1]);
-                const bpm = Math.round(60000 / (intervals.reduce((a, b) => a + b) / intervals.length));
-                if (bpm >= 40 && bpm <= 220) { document.getElementById('tempoSlider').value = bpm; document.getElementById('bpmDisp').textContent = bpm + " BPM"; }
+                const bpm = Math.round(60000 / ((tapTimes[tapTimes.length-1]-tapTimes[0])/(tapTimes.length-1)));
+                if (bpm >= 40 && bpm <= 220) { document.getElementById('tempoSlider').value = bpm; updateDisplays(); }
             }
             document.getElementById('tapBtn').classList.add('active');
             setTimeout(() => document.getElementById('tapBtn').classList.remove('active'), 100);
@@ -330,12 +339,12 @@
                         const div = document.createElement('div'); div.className = 'log-entry';
                         div.innerHTML = `<input type="text" class="log-input-edit" value="${label}"><div style="display:flex; gap:8px; margin-top:5px;"><button class="small-btn save-btn">SAVE</button><button class="small-btn del-btn" style="background:var(--griffin-red)">DEL</button></div>`;
                         div.querySelector('.del-btn').onclick = () => div.remove();
-                        div.querySelector('.save-btn').onclick = () => { const finalName = div.querySelector('.log-input-edit').value; const a = document.createElement('a'); a.href = url; a.download = finalName + ".wav"; a.click(); };
+                        div.querySelector('.save-btn').onclick = () => { const a = document.createElement('a'); a.href = url; a.download = div.querySelector('.log-input-edit').value + ".wav"; a.click(); };
                         log.prepend(div); stream.getTracks().forEach(t => t.stop());
                     };
-                    mediaRecorder.start(); btn.textContent = "STOP OPNAME"; btn.style.background = "var(--griffin-red)"; card.classList.add('recording-active');
+                    mediaRecorder.start(); btn.textContent = "STOP"; btn.style.background = "var(--griffin-red)"; card.querySelector('#recLight').style.opacity = '1';
                 } catch(e) { alert("Mic nodig."); }
-            } else { mediaRecorder.stop(); btn.textContent = "START OPNAME"; btn.style.background = "var(--celtic-green)"; card.classList.remove('recording-active'); }
+            } else { mediaRecorder.stop(); btn.textContent = "START OPNAME"; btn.style.background = "var(--celtic-green)"; card.querySelector('#recLight').style.opacity = '0'; }
         };
 
         function setupRing() {
@@ -373,12 +382,12 @@
 
         document.getElementById('manualBtn').onclick = () => { const p = document.getElementById('manualPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; };
         document.getElementById('instrumentSelect').onchange = updateNodes;
-        document.getElementById('timeSig').onchange = setupRing;
-        document.getElementById('tempoSlider').oninput = () => { document.getElementById('bpmDisp').textContent = document.getElementById('tempoSlider').value + " BPM"; if(!isRunning) document.getElementById('timerDisp').textContent = document.getElementById('tempoSlider').value; };
-        document.getElementById('timerSlider').oninput = () => { if(!isRunning) { practiceTimeLeft = parseInt(document.getElementById('timerSlider').value) * 60; const m = Math.floor(practiceTimeLeft / 60); document.getElementById('timerDisp').textContent = `${m}:00`; } };
+        document.getElementById('tempoSlider').oninput = updateDisplays;
+        document.getElementById('timerSlider').oninput = () => { if(!isRunning) { practiceTimeLeft = parseInt(document.getElementById('timerSlider').value) * 60; updateDisplays(); } };
+        document.getElementById('timerActive').onchange = updateDisplays;
         
         Object.keys(INSTRUMENTS).forEach(inst => { const opt = document.createElement('option'); opt.value = inst; opt.textContent = inst; document.getElementById('instrumentSelect').appendChild(opt); });
-        setupRing(); updateNodes();
+        setupRing(); updateNodes(); updateDisplays();
     </script>
 </body>
 </html>
