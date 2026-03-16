@@ -25,42 +25,42 @@
 
         .container { display: grid; grid-template-columns: 1fr; gap: 25px; width: 100%; max-width: 1100px; }
         @media (min-width: 768px) { .container { grid-template-columns: repeat(2, 1fr); } }
-        .card { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 3px double var(--celtic-green); text-align: center; display: flex; flex-direction: column; min-height: 620px; box-shadow: 0 15px 50px rgba(0,0,0,0.8); position: relative; }
+        .card { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 3px double var(--celtic-green); text-align: center; display: flex; flex-direction: column; min-height: 640px; box-shadow: 0 15px 50px rgba(0,0,0,0.8); position: relative; }
         h2 { color: var(--griffin-orange); text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 12px; font-size: 1.1rem; margin-top: 0; }
 
-        /* --- HERSTELDE SLIDERS V12.7 STYLE --- */
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 20px 0; cursor: pointer; }
         input[type=range]::-webkit-slider-runnable-track { height: 12px; background: rgba(0,0,0,0.5); border-radius: 6px; border: 1px solid #444; }
         input[type=range]::-moz-range-track { height: 12px; background: rgba(0,0,0,0.5); border-radius: 6px; border: 1px solid #444; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 28px; width: 28px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--paper), var(--griffin-orange)); border: 3px solid #121212; margin-top: -9px; box-shadow: 0 4px 6px rgba(0,0,0,0.4); transition: transform 0.1s, box-shadow 0.1s; }
-        input[type=range]::-moz-range-thumb { height: 24px; width: 24px; border-radius: 50%; background: var(--griffin-orange); border: 3px solid #121212; box-shadow: 0 4px 6px rgba(0,0,0,0.4); }
         input[type=range]:active::-webkit-slider-thumb { transform: scale(1.2); box-shadow: 0 0 15px var(--griffin-orange); }
 
-        /* Snaar nodes */
         .string-node { width: 52px; height: 52px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #4a3a2a, #2a1a0a); border: 2px solid #3a2a1a; color: var(--paper); display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.6); transition: all 0.2s; user-select: none; font-family: monospace; font-size: 1.2rem; }
-        .string-node:hover { transform: translateY(-2px); border-color: var(--griffin-orange); }
         .string-node:active, .string-node.playing { transform: scale(0.9); background: radial-gradient(circle at 30% 35%, var(--griffin-orange), #a36a2a); color: #121212; box-shadow: 0 0 20px var(--griffin-orange); }
+
+        .ring-segment { transition: opacity 0.1s, stroke-width 0.1s; opacity: 0.15; }
+        .ring-segment.active { opacity: 1; stroke-width: 16; }
 
         #recLight { height: 6px; width: 100%; background: var(--griffin-orange); margin: 10px 0; border-radius: 3px; opacity: 0; transition: opacity 0.3s; }
         .recording-active #recLight { opacity: 1; animation: breathe 1.5s infinite ease-in-out; box-shadow: 0 0 15px var(--griffin-orange); }
         @keyframes breathe { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
-        
+
         .vu-meter { background: var(--paper); border: 6px solid #3a2a1a; border-radius: 10px 10px 50% 50%; aspect-ratio: 16 / 9; width: 100%; max-width: 250px; margin: 15px auto; position: relative; overflow: hidden; }
         .vu-needle { width: 4px; height: 80%; background: var(--griffin-red); position: absolute; bottom: -5%; left: 50%; transform-origin: bottom center; transform: rotate(-50deg); transition: transform 0.05s ease-out; z-index: 10; }
         #noteDisplay { font-size: 3rem; font-weight: bold; color: #3a2a1a; position: absolute; bottom: 12%; width: 100%; text-align: center; font-family: monospace; }
 
-        .main-display { font-size: 3.2rem; font-weight: bold; color: var(--griffin-orange); font-family: monospace; line-height: 1; z-index: 2; }
-        .sub-display { font-size: 1.2rem; font-weight: bold; color: var(--text-light); z-index: 2; margin-top: 5px; }
+        .main-display { font-size: 3.2rem; font-weight: bold; color: var(--griffin-orange); font-family: monospace; line-height: 1; }
+        .sub-display { font-size: 1.2rem; font-weight: bold; color: var(--text-light); margin-top: 5px; }
 
         input[type=text], .custom-select { width: 100%; padding: 12px; margin: 5px 0 10px 0; background: #0f110f; color: var(--paper); border: 1px solid var(--griffin-orange); border-radius: 6px; }
-        button { width: 100%; padding: 18px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; color: white; background: var(--celtic-green); cursor: pointer; text-transform: uppercase; transition: all 0.1s; }
+        button { width: 100%; padding: 18px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; color: white; background: var(--celtic-green); cursor: pointer; text-transform: uppercase; transition: transform 0.1s; }
         button:active { transform: scale(0.98); }
         
         #tapBtn { background: #3a3a3a; border: 2px solid var(--griffin-orange); color: var(--griffin-orange); margin-top: 10px; }
         #tapBtn.active { background: var(--griffin-orange); color: #121212; box-shadow: 0 0 15px var(--griffin-orange); }
 
-        .log-entry { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; border-left: 4px solid var(--griffin-orange); }
+        .log-entry { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; border-left: 4px solid var(--griffin-orange); text-align: left; }
         .log-input-edit { background: #0f110f; color: var(--paper); border: 1px solid #444; padding: 6px; border-radius: 4px; font-size: 0.8rem; width: 100%; }
+        .small-btn { padding: 8px; font-size: 0.7rem; width: auto; flex: 1; }
 
         .manual-section { margin-bottom: 25px; border-bottom: 1px solid rgba(45, 90, 39, 0.2); padding-bottom: 15px; }
         .manual-section h4 { color: var(--celtic-green); text-transform: uppercase; margin-top: 15px; margin-bottom: 10px; }
@@ -82,41 +82,26 @@
             <p><em>Jouw ultieme metgezel voor repetities en live sessies.</em></p>
 
             <div class="manual-section">
-                <h4>Handleiding (Nederlands)</h4>
+                <h4>Handleiding</h4>
                 <p>Welkom bij de Music Machine van <strong>The Doggy Few</strong>. Deze toolkit is ontwikkeld voor repetities en live sessies.</p>
                 <p><strong>TDF Tuner:</strong> Kies je instrument (Gitaar, Banjo, Bouzouki, Viool of Ukelele). E&euml;n klik op een snaar geeft 2 seconden geluid met een zachte fade-out. Dubbelklik voor een constante loop. Klik nogmaals om het geluid direct te stoppen. Gebruik de <strong>Kroeg Stand</strong> om de gevoeligheid van de meter aan te passen in luidruchtige omgevingen.</p>
-                <p><strong>TDF Time Machine:</strong> Het grote display toont de resterende <strong>Timer</strong>, het kleine display daaronder toont het actuele <strong>BPM</strong>. Gebruik de <strong>TAP TEMPO</strong> knop om een ritme in te tikken door er meermaals op te klikken.</p>
-                <p><strong>Speed Trainer (Versneller):</strong> Stel een verhoging in (+5% of +10%). Na elke timer-ronde klinkt een signaal en verspringt het tempo automatisch omhoog voor de volgende ronde. De metronoom blijft non-stop doorspelen.</p>
-                <p><strong>TDF Recording Machine:</strong> Voer een tracknaam en locatie in en klik op <strong>START OPNAME</strong>. Na het stoppen verschijnt de opname in het logboek. Gebruik <strong>SAVE</strong> om het bestand als .wav definitief op te slaan op je apparaat.</p>
-                <p><em>Let op: Opnames blijven in het browsergeheugen staan tot je de pagina ververst. Sla ze op tijd op!</em></p>
-                
-                <h4>Ritme Training &amp; Ezelsbruggetjes:</h4>
-                <table class="manual-table">
-                    <tr><th>Ritme</th><th>Ezelsbruggetje</th></tr>
-                    <tr><td>9/8 Slipjig</td><td>Apples and Oranges</td></tr>
-                    <tr><td>6/8 Jig</td><td>Rashers and Sausages</td></tr>
-                    <tr><td>4/4 Reel</td><td>Blackberry Strawberry</td></tr>
-                </table>
-
-                <p><strong>Kadootje &amp; Eigendom:</strong> Deze software is ons kadootje aan de community: we delen het met liefde om muzikanten te helpen bij hun repetities. Let echter wel op: het gebruik is gratis, maar de software en alle intellectuele <strong>eigendomsrechten</strong> blijven volledig eigendom van <strong>Lucas Sterk</strong> en <strong>The Doggy Few</strong>. Het is toegestaan de tool te gebruiken voor niet-commerci&euml;le doeleinden, maar de broncode en het concept mogen niet zonder onze uitdrukkelijke toestemming worden toege&euml;igend of elders commercieel worden ingezet.</p>
+                <p><strong>TDF Time Machine:</strong> De ultieme oefenpartner. Het display toont de resterende <strong>Timer</strong> en het actuele <strong>BPM</strong>. Gebruik de <strong>TAP TEMPO</strong> knop om een ritme in te tikken.</p>
+                <p><strong>Speed Trainer (Versneller):</strong> Stel een verhoging in (+5% of +10%). Je kunt kiezen of dit gebeurt na elke timer-ronde of na een vast aantal maten (4, 8 of 16). Bij de verhoging klinkt een signaal en verspringt het tempo automatisch.</p>
+                <p><strong>TDF Recording Machine:</strong> Voer een tracknaam en locatie in en klik op <strong>START OPNAME</strong>. Gebruik <strong>SAVE</strong> om het bestand als .wav definitief op te slaan.</p>
+                <p><strong>Kadootje &amp; Eigendom:</strong> Deze software is ons kadootje aan de community. Het gebruik is gratis, maar de software en alle intellectuele <strong>eigendomsrechten</strong> blijven volledig eigendom van <strong>Lucas Sterk</strong> en <strong>The Doggy Few</strong>.</p>
                 <p style="font-style: italic; margin-top: 15px;">Het leven is immers te kort voor valse noten en matige timing.. :)</p>
             </div>
 
             <div class="manual-section">
-                <h4>User Manual (English)</h4>
+                <h4>User Manual</h4>
                 <p>Welcome to <strong>The Doggy Few</strong> Music Machine. Toolkit for professional rehearsal stability.</p>
-                <p><strong>TDF Tuner:</strong> Select instrument. Single click for a 2s reference tone, double click for an infinite loop. Use <strong>Kroeg Stand</strong> (Pub Mode) to adjust mic sensitivity in noisy rooms.</p>
-                <p><strong>TDF Time Machine:</strong> Dual display setup. The large center text shows the <strong>Timer</strong>, while the sub-display shows the active <strong>BPM</strong>. Use the <strong>TAP TEMPO</strong> button to set the beat by clicking repeatedly.</p>
-                <p><strong>Speed Trainer:</strong> Automatically increases your tempo (+5% or +10%) after each timer session. The metronome continues playing non-stop.</p>
-                <p><strong>TDF Recording Machine:</strong> Enter track name and location, then press <strong>START OPNAME</strong>. Use the <strong>SAVE</strong> button to download your files as .wav.</p>
-                
-                <p><strong>Our Gift &amp; Ownership:</strong> This software is our gift to the musical community. All intellectual property rights remain the sole property of <strong>Lucas Sterk</strong> and <strong>The Doggy Few</strong>. Enjoy the session!</p>
+                <p><strong>TDF Tuner:</strong> Select instrument. Single click for 2s tone, double click for loop. Use <strong>Kroeg Stand</strong> (Pub Mode) for noisy rooms.</p>
+                <p><strong>TDF Time Machine:</strong> Displays <strong>Timer</strong> and active <strong>BPM</strong>. Use the <strong>TAP TEMPO</strong> button to set the beat manually.</p>
+                <p><strong>Speed Trainer:</strong> Automatically increases tempo after timer or a set number of bars (4, 8, or 16).</p>
+                <p><strong>TDF Recording Machine:</strong> Enter track name and location, then press <strong>START OPNAME</strong>. Use <strong>SAVE</strong> to download files as .wav.</p>
+                <p><strong>Ownership:</strong> All intellectual property rights remain the sole property of <strong>Lucas Sterk</strong> and <strong>The Doggy Few</strong>.</p>
                 <p style="font-style: italic; margin-top: 15px;">Because life is too short for out-of-tune notes or bad timing.. :)</p>
             </div>
-            
-            <p style="text-align: center; font-size: 0.9rem; margin-top: 20px;">
-                <strong>Contact:</strong> Info@doggyfew.com
-            </p>
         </div>
     </div>
 
@@ -142,21 +127,26 @@
                     <div class="sub-display" id="bpmDisp">110 BPM</div>
                 </div>
             </div>
-            <span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; margin-top: 15px; text-align: left;">Tempo (BPM)</span>
+            <span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; text-align: left;">Tempo (BPM)</span>
             <input type="range" id="tempoSlider" min="40" max="220" value="110">
+            
+            <div style="display:flex; gap:10px;">
+                <div style="flex:1"><span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; text-align: left;">Versneller</span>
+                    <select id="speedStep" class="custom-select"><option value="0">Gelijk</option><option value="0.05">+ 5%</option><option value="0.10">+ 10%</option></select>
+                </div>
+                <div style="flex:1"><span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; text-align: left;">Interval</span>
+                    <select id="speedInterval" class="custom-select"><option value="timer">Timer</option><option value="4">4 Maten</option><option value="8">8 Maten</option><option value="16">16 Maten</option></select>
+                </div>
+            </div>
+
             <select id="timeSig" class="custom-select">
                 <option value="4">4/4 Reel</option><option value="6">6/8 Jig</option><option value="2">2/4 Polka</option><option value="3">3/4 Waltz</option><option value="9">9/8 Slipjig</option>
             </select>
-            <div style="display:flex; gap:10px;">
-                <div style="flex:1"><span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; margin-top: 15px; text-align: left;">Timer (Min)</span><input type="range" id="timerSlider" min="1" max="60" value="20"></div>
-                <div style="flex:1"><span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; margin-top: 15px; text-align: left;">Versneller</span>
-                    <select id="speedStep" class="custom-select"><option value="0">Gelijk</option><option value="0.05">+ 5%</option><option value="0.10">+ 10%</option></select>
-                </div>
-            </div>
+
             <div style="display:flex; gap:10px; margin:10px 0;">
-                <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:6px; flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border:1px solid #333;"><label style="font-size:0.7rem; color:var(--griffin-orange); font-weight:bold;">METRO</label><input type="checkbox" id="metroActive" checked style="accent-color:var(--griffin-orange); width:18px; height:18px;"></div>
-                <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:6px; flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border:1px solid #333;"><label style="font-size:0.7rem; color:var(--griffin-orange); font-weight:bold;">TIMER</label><input type="checkbox" id="timerActive" checked style="accent-color:var(--griffin-orange); width:18px; height:18px;"></div>
+                <div style="flex:1"><span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; text-align: left;">Timer (Min)</span><input type="range" id="timerSlider" min="1" max="60" value="20"></div>
             </div>
+
             <div style="display:flex; gap:10px; margin-top:10px;">
                 <button id="masterStartBtn" style="flex:2">START</button>
                 <button id="pauseBtn" style="flex:1; display:none; background:#444">PAUZE</button>
@@ -169,7 +159,7 @@
             <div id="recLight"></div>
             <input type="text" id="locField" placeholder="Locatie">
             <input type="text" id="trackField" placeholder="Tracknaam">
-            <div id="sessionLog" style="height:140px; overflow-y:auto; background:rgba(0,0,0,0.3); border-radius:5px; padding:10px; margin-top:15px;"><i>Logboek leeg...</i></div>
+            <div id="sessionLog" style="height:160px; overflow-y:auto; background:rgba(0,0,0,0.3); border-radius:5px; padding:10px; margin-top:15px; color: var(--text-light); font-size: 0.8rem;"><i>Logboek leeg...</i></div>
             <button id="recordBtn" style="margin-top:auto;">START OPNAME</button>
         </div>
     </div>
@@ -178,37 +168,15 @@
 
     <script>
         let audioCtx, analyser, dataArray, metroTimer, isRunning = false, isPaused = false, isTuning = false;
-        let practiceTimeLeft = 1200, nextNoteTime = 0, currentStep = 0, mediaRecorder, chunks = [];
+        let practiceTimeLeft = 1200, nextNoteTime = 0, currentStep = 0, barsPlayed = 0;
         let activeTone = { source: null, freq: null }, practiceInterval, lastNoteTime = 0, smoothedCents = -50;
-
-        let tapTimes = [];
-        const tapBtn = document.getElementById('tapBtn');
-        tapBtn.onclick = () => {
-            const now = performance.now();
-            if (tapTimes.length > 0 && now - tapTimes[tapTimes.length - 1] > 3000) tapTimes = [];
-            tapTimes.push(now);
-            if (tapTimes.length > 1) {
-                const intervals = [];
-                for (let i = 1; i < tapTimes.length; i++) intervals.push(tapTimes[i] - tapTimes[i-1]);
-                const avg = intervals.reduce((a, b) => a + b) / intervals.length;
-                const bpm = Math.round(60000 / avg);
-                if (bpm >= 40 && bpm <= 220) {
-                    document.getElementById('tempoSlider').value = bpm;
-                    updateDisplays();
-                }
-            }
-            tapBtn.classList.add('active');
-            setTimeout(() => tapBtn.classList.remove('active'), 100);
-            if (tapTimes.length > 4) tapTimes.shift();
-        };
+        let mediaRecorder, chunks = [];
 
         const INSTRUMENTS = { "Gitaar": [82.41, 110.0, 146.83, 196.0, 246.94, 329.63], "Banjo": [196.0, 293.66, 440.0, 659.25], "Bouzouki": [196.0, 146.83, 220.0, 293.66], "Viool": [196.0, 293.66, 440.0, 659.25] };
         const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
         function initAudio() { if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); analyser = audioCtx.createAnalyser(); analyser.fftSize = 2048; dataArray = new Float32Array(2048); } if(audioCtx.state === 'suspended') audioCtx.resume(); }
 
-        document.getElementById('manualBtn').onclick = () => { const p = document.getElementById('manualPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; };
-        
         function autoCorrelate(buf, rate) {
             let rms = 0; for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
             rms = Math.sqrt(rms / buf.length);
@@ -246,34 +214,61 @@
                     const s = await navigator.mediaDevices.getUserMedia({ audio: true });
                     audioCtx.createMediaStreamSource(s).connect(analyser);
                     isTuning = true; drawTuner(); document.getElementById('tunerBtn').textContent = "STOP TUNER";
-                } catch (e) { alert("Microfoon nodig."); }
+                } catch (e) { alert("Mic nodig."); }
             } else { isTuning = false; document.getElementById('tunerBtn').textContent = "START TUNER"; }
         };
 
-        function updateDisplays() {
-            document.getElementById('bpmDisp').textContent = document.getElementById('tempoSlider').value + " BPM";
-            if (document.getElementById('timerActive').checked) {
-                const m = Math.floor(practiceTimeLeft / 60); const s = practiceTimeLeft % 60;
-                document.getElementById('timerDisp').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
-            } else { document.getElementById('timerDisp').textContent = document.getElementById('tempoSlider').value; }
+        function applySpeedIncrease() {
+            const step = parseFloat(document.getElementById('speedStep').value);
+            if(step > 0) {
+                const cur = parseInt(document.getElementById('tempoSlider').value);
+                const newBpm = Math.min(220, Math.round(cur * (1 + step)));
+                document.getElementById('tempoSlider').value = newBpm;
+                document.getElementById('bpmDisp').textContent = newBpm + " BPM";
+                const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
+                g.gain.setValueAtTime(0.1, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+                osc.connect(g); g.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+            }
         }
-        document.getElementById('tempoSlider').oninput = updateDisplays;
-        document.getElementById('timerSlider').oninput = () => { if(!isRunning) { practiceTimeLeft = document.getElementById('timerSlider').value * 60; updateDisplays(); } };
+
+        function metroTick() {
+            if(!isRunning || isPaused) return;
+            while (nextNoteTime < audioCtx.currentTime + 0.1) {
+                const sig = parseInt(document.getElementById('timeSig').value);
+                const bpm = document.getElementById('tempoSlider').value;
+                const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                osc.frequency.setValueAtTime(currentStep === 0 ? 1000 : 800, nextNoteTime);
+                g.gain.setValueAtTime(0.2, nextNoteTime); g.gain.exponentialRampToValueAtTime(0.001, nextNoteTime + 0.05);
+                osc.connect(g); g.connect(audioCtx.destination); osc.start(nextNoteTime); osc.stop(nextNoteTime + 0.1);
+                const segments = document.querySelectorAll('.ring-segment');
+                segments.forEach((s, i) => s.classList.toggle('active', i === currentStep));
+                nextNoteTime += 60 / bpm;
+                currentStep = (currentStep + 1) % sig;
+                if (currentStep === 0) {
+                    barsPlayed++;
+                    const interval = document.getElementById('speedInterval').value;
+                    if (interval !== "timer" && barsPlayed % parseInt(interval) === 0) applySpeedIncrease();
+                }
+            }
+            metroTimer = setTimeout(metroTick, 25);
+        }
 
         document.getElementById('masterStartBtn').onclick = function() {
             initAudio();
             if (!isRunning) {
-                isRunning = true; this.textContent = "STOP"; this.style.background = "var(--griffin-red)";
+                isRunning = true; currentStep = 0; barsPlayed = 0;
+                this.textContent = "STOP"; this.style.background = "var(--griffin-red)";
                 document.getElementById('pauseBtn').style.display = "block";
-                nextNoteTime = audioCtx.currentTime; 
-                if(document.getElementById('metroActive').checked) { currentStep = 0; setupRing(); metroTick(); }
+                nextNoteTime = audioCtx.currentTime; setupRing(); metroTick();
                 practiceInterval = setInterval(() => {
-                    if(!isPaused && document.getElementById('timerActive').checked) {
-                        practiceTimeLeft--; updateDisplays();
+                    if(!isPaused) {
+                        practiceTimeLeft--; 
+                        const m = Math.floor(practiceTimeLeft / 60); const s = practiceTimeLeft % 60;
+                        document.getElementById('timerDisp').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
                         if(practiceTimeLeft <= 0) {
-                            const step = parseFloat(document.getElementById('speedStep').value);
-                            if(step > 0) { document.getElementById('tempoSlider').value = Math.min(220, Math.round(document.getElementById('tempoSlider').value * (1+step))); }
-                            practiceTimeLeft = document.getElementById('timerSlider').value * 60;
+                            if (document.getElementById('speedInterval').value === "timer") applySpeedIncrease();
+                            practiceTimeLeft = parseInt(document.getElementById('timerSlider').value) * 60;
                         }
                     }
                 }, 1000);
@@ -281,40 +276,25 @@
                 isRunning = false; clearInterval(practiceInterval); clearTimeout(metroTimer);
                 this.textContent = "START"; this.style.background = "var(--celtic-green)";
                 document.getElementById('pauseBtn').style.display = "none";
-                practiceTimeLeft = document.getElementById('timerSlider').value * 60; updateDisplays();
                 document.querySelectorAll('.ring-segment').forEach(s => s.classList.remove('active'));
             }
         };
 
-        function metroTick() {
-            if(!isRunning || isPaused || !document.getElementById('metroActive').checked) return;
-            while (nextNoteTime < audioCtx.currentTime + 0.1) {
-                const sig = document.getElementById('timeSig').value; const bpm = document.getElementById('tempoSlider').value;
-                const count = parseInt(sig);
-                const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
-                osc.frequency.setValueAtTime(currentStep === 0 ? 1000 : 800, nextNoteTime);
-                g.gain.setValueAtTime(0.2, nextNoteTime); g.gain.exponentialRampToValueAtTime(0.001, nextNoteTime + 0.05);
-                osc.connect(g); g.connect(audioCtx.destination); osc.start(nextNoteTime); osc.stop(nextNoteTime + 0.1);
-                document.querySelectorAll('.ring-segment').forEach((s, i) => s.classList.toggle('active', i === currentStep));
-                nextNoteTime += 60 / bpm; currentStep = (currentStep + 1) % count;
+        let tapTimes = [];
+        document.getElementById('tapBtn').onclick = () => {
+            const now = performance.now();
+            if (tapTimes.length > 0 && now - tapTimes[tapTimes.length - 1] > 3000) tapTimes = [];
+            tapTimes.push(now);
+            if (tapTimes.length > 1) {
+                const intervals = [];
+                for (let i = 1; i < tapTimes.length; i++) intervals.push(tapTimes[i] - tapTimes[i-1]);
+                const bpm = Math.round(60000 / (intervals.reduce((a, b) => a + b) / intervals.length));
+                if (bpm >= 40 && bpm <= 220) { document.getElementById('tempoSlider').value = bpm; document.getElementById('bpmDisp').textContent = bpm + " BPM"; }
             }
-            metroTimer = setTimeout(metroTick, 25);
-        }
-
-        function setupRing() {
-            const container = document.getElementById('segmentsLayer'); container.innerHTML = '';
-            const sig = document.getElementById('timeSig').value;
-            const count = parseInt(sig);
-            const radius = 42; const circ = 2 * Math.PI * radius;
-            for (let i = 0; i < count; i++) {
-                const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                c.setAttribute("cx", 50); c.setAttribute("cy", 50); c.setAttribute("r", radius);
-                c.style.fill = 'none'; c.style.strokeWidth = '12'; c.style.strokeLinecap = 'round';
-                c.style.opacity = '0.15'; c.style.strokeDasharray = `${(circ/count)-3} ${circ}`;
-                c.style.strokeDashoffset = -((circ/count)*i); c.style.stroke = (i === 0) ? '#2ecc71' : 'var(--griffin-orange)';
-                c.classList.add('ring-segment'); container.appendChild(c);
-            }
-        }
+            document.getElementById('tapBtn').classList.add('active');
+            setTimeout(() => document.getElementById('tapBtn').classList.remove('active'), 100);
+            if (tapTimes.length > 4) tapTimes.shift();
+        };
 
         document.getElementById('recordBtn').onclick = async function() {
             initAudio(); const btn = document.getElementById('recordBtn'); const card = document.getElementById('recorderCard');
@@ -328,7 +308,7 @@
                         const label = (document.getElementById('locField').value || "Sessie") + " - " + (document.getElementById('trackField').value || "Take");
                         const log = document.getElementById('sessionLog'); if (log.innerHTML.includes('leeg')) log.innerHTML = '';
                         const div = document.createElement('div'); div.className = 'log-entry';
-                        div.innerHTML = `<input type="text" class="log-input-edit" value="${label}"><div style="display:flex; justify-content:flex-end; gap:8px; margin-top:5px;"><button class="small-btn save-btn">SAVE</button><button class="small-btn del-btn">DEL</button></div>`;
+                        div.innerHTML = `<input type="text" class="log-input-edit" value="${label}"><div style="display:flex; gap:8px; margin-top:5px;"><button class="small-btn save-btn">SAVE</button><button class="small-btn del-btn" style="background:var(--griffin-red)">DEL</button></div>`;
                         div.querySelector('.del-btn').onclick = () => div.remove();
                         div.querySelector('.save-btn').onclick = () => { const finalName = div.querySelector('.log-input-edit').value; const a = document.createElement('a'); a.href = url; a.download = finalName + ".wav"; a.click(); };
                         log.prepend(div); stream.getTracks().forEach(t => t.stop());
@@ -337,6 +317,19 @@
                 } catch(e) { alert("Mic nodig."); }
             } else { mediaRecorder.stop(); btn.textContent = "START OPNAME"; btn.style.background = "var(--celtic-green)"; card.classList.remove('recording-active'); }
         };
+
+        function setupRing() {
+            const container = document.getElementById('segmentsLayer'); container.innerHTML = '';
+            const count = parseInt(document.getElementById('timeSig').value);
+            const radius = 42; const circ = 2 * Math.PI * radius;
+            for (let i = 0; i < count; i++) {
+                const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                c.setAttribute("cx", 50); c.setAttribute("cy", 50); c.setAttribute("r", radius);
+                c.style.fill = 'none'; c.style.strokeWidth = '12'; c.style.strokeDasharray = `${(circ/count)-3} ${circ}`;
+                c.style.strokeDashoffset = -((circ/count)*i); c.style.stroke = (i === 0) ? '#2ecc71' : 'var(--griffin-orange)';
+                c.classList.add('ring-segment'); container.appendChild(c);
+            }
+        }
 
         function playTone(freq, dur) {
             if(activeTone.source) { try{activeTone.source.stop();}catch(e){} }
@@ -358,12 +351,14 @@
             });
         }
 
+        document.getElementById('manualBtn').onclick = () => { const p = document.getElementById('manualPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; };
         document.getElementById('instrumentSelect').onchange = updateNodes;
         document.getElementById('timeSig').onchange = setupRing;
-        Object.keys(INSTRUMENTS).forEach(inst => { const opt = document.createElement('option'); opt.value = inst; opt.textContent = inst; document.getElementById('instrumentSelect').appendChild(opt); });
-        document.getElementById('pauseBtn').onclick = () => { isPaused = !isPaused; document.getElementById('pauseBtn').textContent = isPaused ? "VERDER" : "PAUZE"; if(!isPaused && document.getElementById('metroActive').checked) { nextNoteTime = audioCtx.currentTime; metroTick(); } };
+        document.getElementById('tempoSlider').oninput = () => { document.getElementById('bpmDisp').textContent = document.getElementById('tempoSlider').value + " BPM"; if(!isRunning) document.getElementById('timerDisp').textContent = document.getElementById('tempoSlider').value; };
+        document.getElementById('timerSlider').oninput = () => { if(!isRunning) { practiceTimeLeft = parseInt(document.getElementById('timerSlider').value) * 60; const m = Math.floor(practiceTimeLeft / 60); document.getElementById('timerDisp').textContent = `${m}:00`; } };
         
-        setupRing(); updateNodes(); updateDisplays();
+        Object.keys(INSTRUMENTS).forEach(inst => { const opt = document.createElement('option'); opt.value = inst; opt.textContent = inst; document.getElementById('instrumentSelect').appendChild(opt); });
+        setupRing(); updateNodes();
     </script>
 </body>
 </html>
