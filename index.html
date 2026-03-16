@@ -14,376 +14,211 @@
             --griffin-red: #a8281a;
             --text-light: #f0f4ef;
             --paper: #e6dab7;
-            --tune-success: #2ecc71;
         }
 
-        /* --- DE DEFINITIEVE ORANJE FIX --- */
-        * { 
-            box-sizing: border-box; 
-            outline: none !important; 
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; outline: none !important; -webkit-tap-highlight-color: transparent !important; }
+        body { font-family: 'Georgia', serif; background-color: var(--bg-dark); color: var(--text-light); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px 15px; }
+        .header h1 { font-variant: small-caps; color: var(--griffin-orange); margin: 0; font-size: 2.2rem; text-align: center; margin-bottom: 20px; }
         
-        input:focus, select:focus, textarea:focus, button:focus {
-            border-color: var(--griffin-orange) !important;
-            box-shadow: 0 0 8px rgba(212, 142, 61, 0.6) !important;
-        }
-
-        input[type=range] {
-            accent-color: var(--griffin-orange) !important;
-        }
-
-        body {
-            font-family: 'Georgia', serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px 15px;
-        }
-
-        .header { text-align: center; margin-bottom: 20px; width: 100%; }
-        .header h1 { font-variant: small-caps; letter-spacing: 2px; color: var(--griffin-orange); line-height: 1.1; margin: 0; font-size: clamp(1.8rem, 5vw, 2.8rem); }
-
-        #manualBtn { background: transparent; border: 2px solid var(--griffin-orange); color: var(--griffin-orange); padding: 8px 25px; font-size: 0.9rem; margin-bottom: 25px; cursor: pointer; border-radius: 4px; font-weight: bold; width: auto; }
-
-        #manualPanel {
-            max-width: 1100px;
-            width: 100%;
-            background: var(--paper);
-            color: #121412;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            display: none;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-            border: 3px double var(--celtic-green);
-        }
-
-        .manual-grid { display: grid; grid-template-columns: 1fr; gap: 40px; padding: 30px; }
-        @media (min-width: 850px) { .manual-grid { grid-template-columns: 1fr 1fr; } }
-        .manual-sectie h3 { color: var(--celtic-green); border-bottom: 2px solid var(--celtic-green); padding-bottom: 8px; margin-top: 0; font-variant: small-caps; }
-        .manual-sectie p, .manual-sectie li { line-height: 1.5; font-size: 0.95rem; margin-bottom: 10px; }
-        .mnemonic-table { width: 100%; font-size: 0.8rem; border-collapse: collapse; margin: 10px 0; background: rgba(0,0,0,0.03); }
-        .mnemonic-table td { padding: 6px 8px; border-bottom: 1px solid rgba(0,0,0,0.1); }
-        .disclaimer-box { background: rgba(0,0,0,0.05); padding: 15px; border-radius: 4px; border-left: 5px solid var(--griffin-red); margin: 20px 0; font-size: 0.85rem; }
+        #manualBtn { background: transparent; border: 2px solid var(--griffin-orange); color: var(--griffin-orange); padding: 10px 30px; font-size: 0.9rem; margin: 0 auto 25px auto; cursor: pointer; border-radius: 4px; font-weight: bold; text-transform: uppercase; display: block; width: fit-content; }
+        #manualPanel { max-width: 1100px; width: 100%; background: var(--paper); color: #121412; border-radius: 12px; margin-bottom: 30px; display: none; padding: 30px; border: 3px double var(--celtic-green); box-shadow: 0 10px 40px rgba(0,0,0,0.5); text-align: left; max-height: 75vh; overflow-y: auto; }
 
         .container { display: grid; grid-template-columns: 1fr; gap: 25px; width: 100%; max-width: 1100px; }
-        @media (min-width: 768px) { .container { grid-template-columns: repeat(2, 1fr); align-items: stretch; } }
+        @media (min-width: 768px) { .container { grid-template-columns: repeat(2, 1fr); } }
+        .card { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 3px double var(--celtic-green); text-align: center; display: flex; flex-direction: column; min-height: 620px; box-shadow: 0 15px 50px rgba(0,0,0,0.8); position: relative; }
+        h2 { color: var(--griffin-orange); text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 12px; font-size: 1.1rem; margin-top: 0; }
 
-        .card { background: var(--card-bg); padding: 25px; border-radius: 15px; box-shadow: 0 15px 50px rgba(0,0,0,0.8); text-align: center; border: 3px double var(--celtic-green); display: flex; flex-direction: column; min-height: 580px; position: relative;}
-        .card.in-tune { border-color: var(--tune-success); box-shadow: 0 0 30px rgba(46, 204, 113, 0.4); }
-        h2 { color: var(--griffin-orange); font-size: 1.1rem; margin-top: 0; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 12px; }
+        /* --- HERSTELDE SLIDERS V12.7 STYLE --- */
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 20px 0; cursor: pointer; }
+        input[type=range]::-webkit-slider-runnable-track { height: 12px; background: rgba(0,0,0,0.5); border-radius: 6px; border: 1px solid #444; }
+        input[type=range]::-moz-range-track { height: 12px; background: rgba(0,0,0,0.5); border-radius: 6px; border: 1px solid #444; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 28px; width: 28px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--paper), var(--griffin-orange)); border: 3px solid #121212; margin-top: -9px; box-shadow: 0 4px 6px rgba(0,0,0,0.4); transition: transform 0.1s, box-shadow 0.1s; }
+        input[type=range]::-moz-range-thumb { height: 24px; width: 24px; border-radius: 50%; background: var(--griffin-orange); border: 3px solid #121212; box-shadow: 0 4px 6px rgba(0,0,0,0.4); }
+        input[type=range]:active::-webkit-slider-thumb { transform: scale(1.2); box-shadow: 0 0 15px var(--griffin-orange); }
 
-        .metro-container { position: relative; width: 220px; height: 220px; margin: 15px auto; display: flex; align-items: center; justify-content: center; }
-        #metroRing { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
-        .ring-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 14; }
-        .ring-segment { fill: none; stroke-width: 14; stroke-linecap: round; opacity: 0.15; transition: opacity 0.05s, stroke 0.1s; }
-        .ring-segment.active { opacity: 1; filter: drop-shadow(0 0 12px currentColor); }
-        .display-text { font-size: 3.5rem; font-weight: bold; color: var(--griffin-orange); font-family: monospace; z-index: 2; }
+        /* Snaar nodes */
+        .string-node { width: 52px; height: 52px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #4a3a2a, #2a1a0a); border: 2px solid #3a2a1a; color: var(--paper); display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.6); transition: all 0.2s; user-select: none; font-family: monospace; font-size: 1.2rem; }
+        .string-node:hover { transform: translateY(-2px); border-color: var(--griffin-orange); }
+        .string-node:active, .string-node.playing { transform: scale(0.9); background: radial-gradient(circle at 30% 35%, var(--griffin-orange), #a36a2a); color: #121212; box-shadow: 0 0 20px var(--griffin-orange); }
+
+        #recLight { height: 6px; width: 100%; background: var(--griffin-orange); margin: 10px 0; border-radius: 3px; opacity: 0; transition: opacity 0.3s; }
+        .recording-active #recLight { opacity: 1; animation: breathe 1.5s infinite ease-in-out; box-shadow: 0 0 15px var(--griffin-orange); }
+        @keyframes breathe { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
         
-        .vol-label { font-size: 0.65rem; color: var(--griffin-orange); font-weight: bold; margin-bottom: 2px; display: block; text-align: left;}
+        .vu-meter { background: var(--paper); border: 6px solid #3a2a1a; border-radius: 10px 10px 50% 50%; aspect-ratio: 16 / 9; width: 100%; max-width: 250px; margin: 15px auto; position: relative; overflow: hidden; }
+        .vu-needle { width: 4px; height: 80%; background: var(--griffin-red); position: absolute; bottom: -5%; left: 50%; transform-origin: bottom center; transform: rotate(-50deg); transition: transform 0.05s ease-out; z-index: 10; }
+        #noteDisplay { font-size: 3rem; font-weight: bold; color: #3a2a1a; position: absolute; bottom: 12%; width: 100%; text-align: center; font-family: monospace; }
 
-        .vu-meter { background: var(--paper); border: 6px solid #3a2a1a; border-radius: 10px 10px 50% 50%; aspect-ratio: 16 / 9; width: 100%; max-width: 300px; margin: 15px auto; position: relative; overflow: hidden; }
-        .vu-needle { width: 3px; height: 78%; background: var(--griffin-red); position: absolute; bottom: -8%; left: 50%; transform-origin: bottom center; transform: rotate(-50deg); transition: transform 0.1s ease-out; z-index: 10; }
-        #noteDisplay { font-size: 3rem; font-weight: bold; color: #3a2a1a; position: absolute; bottom: 12%; width: 100%; text-align: center; }
+        .main-display { font-size: 3.2rem; font-weight: bold; color: var(--griffin-orange); font-family: monospace; line-height: 1; z-index: 2; }
+        .sub-display { font-size: 1.2rem; font-weight: bold; color: var(--text-light); z-index: 2; margin-top: 5px; }
 
-        .string-nodes { display: flex; justify-content: center; gap: 6px; margin: 10px 0; flex-wrap: wrap; min-height: 42px; }
-        .string-node { width: 40px; height: 40px; border-radius: 50%; background: #111; border: 2px solid var(--celtic-green); color: var(--paper); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; cursor: pointer; font-weight: bold; transition: all 0.2s; }
-        .string-node.active-tone { border-color: var(--griffin-orange); box-shadow: 0 0 10px var(--griffin-orange); color: var(--griffin-orange); }
+        input[type=text], .custom-select { width: 100%; padding: 12px; margin: 5px 0 10px 0; background: #0f110f; color: var(--paper); border: 1px solid var(--griffin-orange); border-radius: 6px; }
+        button { width: 100%; padding: 18px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; color: white; background: var(--celtic-green); cursor: pointer; text-transform: uppercase; transition: all 0.1s; }
+        button:active { transform: scale(0.98); }
+        
+        #tapBtn { background: #3a3a3a; border: 2px solid var(--griffin-orange); color: var(--griffin-orange); margin-top: 10px; }
+        #tapBtn.active { background: var(--griffin-orange); color: #121212; box-shadow: 0 0 15px var(--griffin-orange); }
 
-        select, input[type=range], input[type=text] { width: 100%; padding: 10px; margin: 4px 0; border-radius: 6px; background: #0f110f; color: var(--paper); border: 1px solid var(--griffin-orange); }
-        button { width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; color: white; background: var(--celtic-green); cursor: pointer; text-transform: uppercase; margin-top: 5px;}
+        .log-entry { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; border-left: 4px solid var(--griffin-orange); }
+        .log-input-edit { background: #0f110f; color: var(--paper); border: 1px solid #444; padding: 6px; border-radius: 4px; font-size: 0.8rem; width: 100%; }
 
-        #sessionLog { margin: 10px 0; height: 160px; overflow-y: auto; background: rgba(0,0,0,0.3); border-radius: 5px; padding: 10px; text-align: left; }
-        .log-entry { display: flex; flex-direction: column; padding: 10px 0; border-bottom: 1px solid #333; gap: 8px; }
-        .log-row-top { display: flex; width: 100%; }
-        .log-row-bottom { display: flex; justify-content: flex-end; gap: 6px; width: 100%; }
-        .edit-name-input { background: transparent; border: 1px solid rgba(212, 142, 61, 0.3); color: var(--text-light); font-family: 'Georgia', serif; font-size: 0.85rem; padding: 4px 8px; width: 100%; border-radius: 4px; }
+        .manual-section { margin-bottom: 25px; border-bottom: 1px solid rgba(45, 90, 39, 0.2); padding-bottom: 15px; }
+        .manual-section h4 { color: var(--celtic-green); text-transform: uppercase; margin-top: 15px; margin-bottom: 10px; }
+        .manual-table { width: 100%; border-collapse: collapse; margin: 15px 0; background: rgba(0,0,0,0.05); }
+        .manual-table td, .manual-table th { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        .manual-table th { background: var(--celtic-green); color: white; }
 
-        .small-btn { padding: 6px 10px; font-size: 0.65rem; border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: bold; text-transform: uppercase; }
-        .btn-play { background: var(--celtic-green); }
-        .btn-save { background: #444; }
-        .btn-del { background: var(--griffin-red); }
-
-        #recordStatus { display: none; width: 60px; height: 5px; background: var(--griffin-orange); margin: 0 auto 10px auto; border-radius: 3px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
-        footer { margin-top: 40px; padding: 20px; text-align: center; border-top: 1px solid #333; width: 100%; font-size: 0.9rem;}
+        footer { margin-top: 50px; padding: 25px; text-align: center; border-top: 1px solid #333; width: 100%; font-size: 0.9rem; opacity: 0.6; }
     </style>
 </head>
-
 <body>
-    <div class="header"><h1>The Doggy Few<br>Music Machine</h1></div>
-    <button id="manualBtn">MANUAL</button>
+
+    <div class="header"><h1>The Doggy Few Music Machine</h1></div>
+    <button id="manualBtn">HANDLEIDING / MANUAL</button>
 
     <div id="manualPanel">
-        <div class="manual-grid">
-            <div class="manual-sectie">
-                <h3>📘 Handleiding (NL)</h3>
+        <div style="padding: 25px;">
+            <h3>Welkom bij de Music Machine van The Doggy Few</h3>
+            <p><em>Jouw ultieme metgezel voor repetities en live sessies.</em></p>
+
+            <div class="manual-section">
+                <h4>Handleiding (Nederlands)</h4>
                 <p>Welkom bij de Music Machine van <strong>The Doggy Few</strong>. Deze toolkit is ontwikkeld voor repetities en live sessies.</p>
-                <ul>
-                    <li><strong>Tuner:</strong> Kies je instrument (nu ook <strong>Viool</strong>). Eén klik op een snaar geeft 2 seconden geluid. Dubbelklik voor een constante toon. Een klik op een spelende snaar stopt het geluid direct.</li>
-                    <li><strong>Live Recorder:</strong> Klik op START om de opname te beginnen. De oranje balk boven de tracknaam pulseert zachtjes zolang de opname loopt. Na het stoppen kun je de tracknaam direct aanpassen en de opname lokaal opslaan (SAVE).</li>
-                    <li><strong>Metronoom:</strong> Groen geeft de hoofdaccenten aan, Oranje de tussentikken.</li>
-                </ul>
-                <p><strong>Ritme Training:</strong> Gebruik de ezelsbruggetjes om in de juiste cadans te komen:</p>
-                <table class="mnemonic-table">
-                    <tr><td><b>9/8 Slipjig</b></td><td>Apples and Oranges</td></tr>
-                    <tr><td><b>6/8 Jig</b></td><td>Rashers and Sausages</td></tr>
-                    <tr><td><b>4/4 Reel</b></td><td>Blackberry Strawberry</td></tr>
-                    <tr><td><b>4/4 Hornpipe</b></td><td>Step-and-hop (Gepunteerd ritme)</td></tr>
+                <p><strong>TDF Tuner:</strong> Kies je instrument (Gitaar, Banjo, Bouzouki, Viool of Ukelele). E&euml;n klik op een snaar geeft 2 seconden geluid met een zachte fade-out. Dubbelklik voor een constante loop. Klik nogmaals om het geluid direct te stoppen. Gebruik de <strong>Kroeg Stand</strong> om de gevoeligheid van de meter aan te passen in luidruchtige omgevingen.</p>
+                <p><strong>TDF Time Machine:</strong> Het grote display toont de resterende <strong>Timer</strong>, het kleine display daaronder toont het actuele <strong>BPM</strong>. Gebruik de <strong>TAP TEMPO</strong> knop om een ritme in te tikken door er meermaals op te klikken.</p>
+                <p><strong>Speed Trainer (Versneller):</strong> Stel een verhoging in (+5% of +10%). Na elke timer-ronde klinkt een signaal en verspringt het tempo automatisch omhoog voor de volgende ronde. De metronoom blijft non-stop doorspelen.</p>
+                <p><strong>TDF Recording Machine:</strong> Voer een tracknaam en locatie in en klik op <strong>START OPNAME</strong>. Na het stoppen verschijnt de opname in het logboek. Gebruik <strong>SAVE</strong> om het bestand als .wav definitief op te slaan op je apparaat.</p>
+                <p><em>Let op: Opnames blijven in het browsergeheugen staan tot je de pagina ververst. Sla ze op tijd op!</em></p>
+                
+                <h4>Ritme Training &amp; Ezelsbruggetjes:</h4>
+                <table class="manual-table">
+                    <tr><th>Ritme</th><th>Ezelsbruggetje</th></tr>
+                    <tr><td>9/8 Slipjig</td><td>Apples and Oranges</td></tr>
+                    <tr><td>6/8 Jig</td><td>Rashers and Sausages</td></tr>
+                    <tr><td>4/4 Reel</td><td>Blackberry Strawberry</td></tr>
                 </table>
-                <p><i>Hoe te gebruiken:</i> Zeg de lettergrepen hardop mee op het tempo. De <b>dikgedrukte</b> klank valt samen met de <b>Groene flits</b> op de ring.</p>
-                <p><strong>Contact & Support:</strong> Bugreports, feature verzoekjes, bedankjes of overig contact: <a href="mailto:Info@doggyfew.com">Info@doggyfew.com</a></p>
-                <div class="disclaimer-box">
-                    <strong>Kadootje:</strong> Dit is een muzikaal kadootje en blijft eigendom van The Doggy Few. Deel het gerust voor niet-commercieel gebruik. Het leven is simpelweg te kort voor valse noten of een matige timing. :)
-                </div>
-                <p>Hartelijke groet uit Groningen, Holland.</p>
+
+                <p><strong>Kadootje &amp; Eigendom:</strong> Deze software is ons kadootje aan de community: we delen het met liefde om muzikanten te helpen bij hun repetities. Let echter wel op: het gebruik is gratis, maar de software en alle intellectuele <strong>eigendomsrechten</strong> blijven volledig eigendom van <strong>Lucas Sterk</strong> en <strong>The Doggy Few</strong>. Het is toegestaan de tool te gebruiken voor niet-commerci&euml;le doeleinden, maar de broncode en het concept mogen niet zonder onze uitdrukkelijke toestemming worden toege&euml;igend of elders commercieel worden ingezet.</p>
+                <p style="font-style: italic; margin-top: 15px;">Het leven is immers te kort voor valse noten en matige timing.. :)</p>
+            </div>
+
+            <div class="manual-section">
+                <h4>User Manual (English)</h4>
+                <p>Welcome to <strong>The Doggy Few</strong> Music Machine. Toolkit for professional rehearsal stability.</p>
+                <p><strong>TDF Tuner:</strong> Select instrument. Single click for a 2s reference tone, double click for an infinite loop. Use <strong>Kroeg Stand</strong> (Pub Mode) to adjust mic sensitivity in noisy rooms.</p>
+                <p><strong>TDF Time Machine:</strong> Dual display setup. The large center text shows the <strong>Timer</strong>, while the sub-display shows the active <strong>BPM</strong>. Use the <strong>TAP TEMPO</strong> button to set the beat by clicking repeatedly.</p>
+                <p><strong>Speed Trainer:</strong> Automatically increases your tempo (+5% or +10%) after each timer session. The metronome continues playing non-stop.</p>
+                <p><strong>TDF Recording Machine:</strong> Enter track name and location, then press <strong>START OPNAME</strong>. Use the <strong>SAVE</strong> button to download your files as .wav.</p>
+                
+                <p><strong>Our Gift &amp; Ownership:</strong> This software is our gift to the musical community. All intellectual property rights remain the sole property of <strong>Lucas Sterk</strong> and <strong>The Doggy Few</strong>. Enjoy the session!</p>
+                <p style="font-style: italic; margin-top: 15px;">Because life is too short for out-of-tune notes or bad timing.. :)</p>
             </div>
             
-            <div class="manual-sectie">
-                <h3>📘 User Manual (EN)</h3>
-                <p>Official toolkit for rehearsals and live sessions. Designed for stability and precision.</p>
-                <ul>
-                    <li><strong>Tuner:</strong> Select instrument (Guitar, Banjo, Bouzouki, <strong>Violin</strong>, Uke). Single click for 2s tone, double click for infinite loop. Click any active string to mute instantly.</li>
-                    <li><strong>Recorder:</strong> The orange bar pulses when recording is active. Rename tracks in the log before saving as a WAV file.</li>
-                    <li><strong>Rhythm Mnemonics:</strong> Master the flow by using "Apples and Oranges" (9/8), "Rashers and Sausages" (6/8), or "Blackberry Strawberry" (4/4).</li>
-                    <li><strong>Support:</strong> For bug reports, feature requests or thanks: <a href="mailto:Info@doggyfew.com">Info@doggyfew.com</a></li>
-                </ul>
-                <div class="disclaimer-box">
-                   <strong>Note:</strong> This is a musical gift and remains our property. Life is too short for bum notes and poor timing..:)
-                </div>
-                <p>Warm regards from Groningen, Holland.</p>
-            </div>
+            <p style="text-align: center; font-size: 0.9rem; margin-top: 20px;">
+                <strong>Contact:</strong> Info@doggyfew.com
+            </p>
         </div>
     </div>
 
     <div class="container">
-        <div class="card" id="tunerCard">
+        <div class="card">
             <h2>TDF Tuner</h2>
-            <div class="vu-meter">
-                <div id="noteDisplay">-</div>
-                <div class="vu-needle" id="needle"></div>
-            </div>
-            <select id="instrumentSelect"></select>
-            <div class="string-nodes" id="stringNodes"></div>
-            <div style="display:flex; justify-content:center; align-items:center; gap:10px; margin: 10px 0;">
-                <span style="font-size:0.7rem; font-weight:bold; color:var(--griffin-orange);">KROEG STAND</span>
-                <input type="checkbox" id="noiseToggle" style="width:30px;">
+            <div class="vu-meter"><div id="noteDisplay">-</div><div class="vu-needle" id="needle"></div></div>
+            <select id="instrumentSelect" class="custom-select"></select>
+            <div id="stringNodes" style="display: flex; justify-content: center; gap: 12px; margin: 20px 0;"></div>
+            <div class="toggle-box" style="margin: 10px 0; background:rgba(0,0,0,0.2); padding:10px; border-radius:6px; display:flex; align-items:center; justify-content:center; gap:8px; border: 1px solid #333;">
+                <label style="font-size:0.7rem; color:var(--griffin-orange); font-weight:bold;">KROEG STAND</label>
+                <input type="checkbox" id="noiseToggle" style="accent-color:var(--griffin-orange); width:18px; height:18px;">
             </div>
             <button id="tunerBtn">START TUNER</button>
         </div>
 
         <div class="card">
-            <h2>TDF Metronoom</h2>
-            <div class="metro-container">
-                <svg id="metroRing" viewBox="0 0 100 100">
-                    <circle class="ring-bg" cx="50" cy="50" r="42"></circle>
-                    <g id="segmentsLayer"></g>
-                </svg>
-                <div class="display-text" id="bpmText">110</div>
+            <h2>TDF Time Machine</h2>
+            <div style="position: relative; width: 220px; height: 220px; margin: 15px auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <svg id="metroRing" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg);" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="12"></circle><g id="segmentsLayer"></g></svg>
+                <div style="text-align:center;">
+                    <div class="main-display" id="timerDisp">20:00</div>
+                    <div class="sub-display" id="bpmDisp">110 BPM</div>
+                </div>
             </div>
+            <span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; margin-top: 15px; text-align: left;">Tempo (BPM)</span>
             <input type="range" id="tempoSlider" min="40" max="220" value="110">
-            <select id="timeSig">
-                <option value="2">2/4 Polka</option>
-                <option value="3">3/4 Waltz</option>
-                <option value="4">4/4 Reel</option>
-                <option value="4-dotted">4/4 Hornpipe (Dotted)</option>
-                <option value="6">6/8 Jig</option>
-                <option value="12">12/8 Slide</option>
-                <option value="9">9/8 Slipjig</option>
-                <option value="2-march">2/4 March</option>
+            <select id="timeSig" class="custom-select">
+                <option value="4">4/4 Reel</option><option value="6">6/8 Jig</option><option value="2">2/4 Polka</option><option value="3">3/4 Waltz</option><option value="9">9/8 Slipjig</option>
             </select>
-            <div style="display: flex; gap: 10px; margin-top: 5px;">
-                <div style="flex:1">
-                    <span class="vol-label">GELUID</span>
-                    <select id="soundType">
-                        <option value="wood">Woodblock</option>
-                        <option value="click">Click</option>
-                        <option value="beep">Beep</option>
-                    </select>
-                </div>
-                <div style="flex:1">
-                    <span class="vol-label">VOLUME</span>
-                    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+            <div style="display:flex; gap:10px;">
+                <div style="flex:1"><span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; margin-top: 15px; text-align: left;">Timer (Min)</span><input type="range" id="timerSlider" min="1" max="60" value="20"></div>
+                <div style="flex:1"><span style="font-size: 0.7rem; color: var(--griffin-orange); font-weight: bold; text-transform: uppercase; display: block; margin-top: 15px; text-align: left;">Versneller</span>
+                    <select id="speedStep" class="custom-select"><option value="0">Gelijk</option><option value="0.05">+ 5%</option><option value="0.10">+ 10%</option></select>
                 </div>
             </div>
-            <button id="metroBtn">START</button>
+            <div style="display:flex; gap:10px; margin:10px 0;">
+                <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:6px; flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border:1px solid #333;"><label style="font-size:0.7rem; color:var(--griffin-orange); font-weight:bold;">METRO</label><input type="checkbox" id="metroActive" checked style="accent-color:var(--griffin-orange); width:18px; height:18px;"></div>
+                <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:6px; flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border:1px solid #333;"><label style="font-size:0.7rem; color:var(--griffin-orange); font-weight:bold;">TIMER</label><input type="checkbox" id="timerActive" checked style="accent-color:var(--griffin-orange); width:18px; height:18px;"></div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:10px;">
+                <button id="masterStartBtn" style="flex:2">START</button>
+                <button id="pauseBtn" style="flex:1; display:none; background:#444">PAUZE</button>
+            </div>
+            <button id="tapBtn">TAP TEMPO</button>
         </div>
 
-        <div class="card">
-            <h2>TDF Live Recorder</h2>
-            <div id="recordStatus"></div>
-            <input type="text" id="recordName" placeholder="Track Naam">
-            <input type="text" id="recordLocation" placeholder="Locatie">
-            <div id="sessionLog"><div id="logContent"><i>Geen opnames...</i></div></div>
-            <button id="recBtn">START OPNAME</button>
-        </div>
-
-        <div class="card">
-            <h2>TDF Practice Timer</h2>
-            <div class="display-text" id="timerDisplay">20:00</div>
-            <input type="range" id="timerSlider" min="1" max="60" value="20">
-            <button id="timerBtn">START SESSIE</button>
+        <div class="card" id="recorderCard">
+            <h2>TDF Recording Machine</h2>
+            <div id="recLight"></div>
+            <input type="text" id="locField" placeholder="Locatie">
+            <input type="text" id="trackField" placeholder="Tracknaam">
+            <div id="sessionLog" style="height:140px; overflow-y:auto; background:rgba(0,0,0,0.3); border-radius:5px; padding:10px; margin-top:15px;"><i>Logboek leeg...</i></div>
+            <button id="recordBtn" style="margin-top:auto;">START OPNAME</button>
         </div>
     </div>
 
-    <footer>&copy; 2026 THE DOGGY FEW &bull; INFO@DOGGYFEW.COM</footer>
+    <footer>&copy; 2026 THE DOGGY FEW &bull; LUCAS STERK</footer>
 
     <script>
-        let audioCtx, analyser, dataArray, isTuning = false, lastNoteTime = 0, smoothedCents = -50;
-        let metroTimer, isRunning = false, nextNoteTime = 0, currentStep = 0;
-        let mediaRecorder, audioChunks = [], isRecording = false, activeLogAudio = null, recordStream = null;
-        let activeToneInfo = { source: null, gain: null, freq: null, timer: null, mode: null };
-        let practiceInterval, practiceTimeLeft = 1200, isPracticeRunning = false;
+        let audioCtx, analyser, dataArray, metroTimer, isRunning = false, isPaused = false, isTuning = false;
+        let practiceTimeLeft = 1200, nextNoteTime = 0, currentStep = 0, mediaRecorder, chunks = [];
+        let activeTone = { source: null, freq: null }, practiceInterval, lastNoteTime = 0, smoothedCents = -50;
 
-        const INSTRUMENTS = { 
-            "Gitaar (Standaard)": [82.41, 110.0, 146.83, 196.0, 246.94, 329.63], 
-            "Banjo (GDAE)": [196.0, 293.66, 440.0, 659.25], 
-            "Bouzouki (GDAD)": [196.0, 146.83, 220.0, 293.66], 
-            "Viool": [196.0, 293.66, 440.0, 659.25],
-            "Ukelele": [392.0, 261.63, 329.63, 440.0] 
+        let tapTimes = [];
+        const tapBtn = document.getElementById('tapBtn');
+        tapBtn.onclick = () => {
+            const now = performance.now();
+            if (tapTimes.length > 0 && now - tapTimes[tapTimes.length - 1] > 3000) tapTimes = [];
+            tapTimes.push(now);
+            if (tapTimes.length > 1) {
+                const intervals = [];
+                for (let i = 1; i < tapTimes.length; i++) intervals.push(tapTimes[i] - tapTimes[i-1]);
+                const avg = intervals.reduce((a, b) => a + b) / intervals.length;
+                const bpm = Math.round(60000 / avg);
+                if (bpm >= 40 && bpm <= 220) {
+                    document.getElementById('tempoSlider').value = bpm;
+                    updateDisplays();
+                }
+            }
+            tapBtn.classList.add('active');
+            setTimeout(() => tapBtn.classList.remove('active'), 100);
+            if (tapTimes.length > 4) tapTimes.shift();
         };
+
+        const INSTRUMENTS = { "Gitaar": [82.41, 110.0, 146.83, 196.0, 246.94, 329.63], "Banjo": [196.0, 293.66, 440.0, 659.25], "Bouzouki": [196.0, 146.83, 220.0, 293.66], "Viool": [196.0, 293.66, 440.0, 659.25] };
         const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-        function initAudio() { 
-            if (!audioCtx) { 
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)(); 
-                analyser = audioCtx.createAnalyser(); 
-                analyser.fftSize = 2048; 
-                dataArray = new Float32Array(2048); 
-            } 
-            if (audioCtx.state === 'suspended') audioCtx.resume(); 
-        }
+        function initAudio() { if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); analyser = audioCtx.createAnalyser(); analyser.fftSize = 2048; dataArray = new Float32Array(2048); } if(audioCtx.state === 'suspended') audioCtx.resume(); }
 
-        // --- PRACTICE TIMER LOGICA ---
-        const timerSlider = document.getElementById('timerSlider');
-        const timerDisplay = document.getElementById('timerDisplay');
-        const timerBtn = document.getElementById('timerBtn');
-
-        timerSlider.oninput = function() {
-            if (!isPracticeRunning) {
-                practiceTimeLeft = this.value * 60;
-                updateTimerDisplay();
-            }
-        };
-
-        function updateTimerDisplay() {
-            const m = Math.floor(practiceTimeLeft / 60);
-            const s = practiceTimeLeft % 60;
-            timerDisplay.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
-        }
-
-        function playPracticeEnd() {
-            initAudio();
-            const now = audioCtx.currentTime;
-            for(let i=0; i<3; i++) {
-                const osc = audioCtx.createOscillator();
-                const g = audioCtx.createGain();
-                osc.type = 'square';
-                osc.frequency.setValueAtTime(880, now + (i * 0.2));
-                g.gain.setValueAtTime(0.1, now + (i * 0.2));
-                g.gain.exponentialRampToValueAtTime(0.001, now + (i * 0.2) + 0.1);
-                osc.connect(g); g.connect(audioCtx.destination);
-                osc.start(now + (i * 0.2)); osc.stop(now + (i * 0.2) + 0.1);
-            }
-        }
-
-        timerBtn.onclick = function() {
-            initAudio();
-            if (!isPracticeRunning) {
-                isPracticeRunning = true;
-                this.textContent = "STOP SESSIE";
-                this.style.background = "var(--griffin-red)";
-                practiceInterval = setInterval(() => {
-                    practiceTimeLeft--;
-                    updateTimerDisplay();
-                    if (practiceTimeLeft <= 0) {
-                        clearInterval(practiceInterval);
-                        isPracticeRunning = false;
-                        playPracticeEnd();
-                        timerBtn.textContent = "KLAAR!";
-                        setTimeout(() => { 
-                            timerBtn.textContent = "START SESSIE"; 
-                            timerBtn.style.background = "var(--celtic-green)";
-                            practiceTimeLeft = timerSlider.value * 60;
-                            updateTimerDisplay();
-                        }, 3000);
-                    }
-                }, 1000);
-            } else {
-                clearInterval(practiceInterval);
-                isPracticeRunning = false;
-                this.textContent = "START SESSIE";
-                this.style.background = "var(--celtic-green)";
-            }
-        };
-
-        // --- TUNER LOGICA ---
-        function stopActiveTone() {
-            if (activeToneInfo.source && activeToneInfo.gain) {
-                const now = audioCtx.currentTime;
-                activeToneInfo.gain.gain.cancelScheduledValues(now);
-                activeToneInfo.gain.gain.linearRampToValueAtTime(0, now + 0.2);
-                const oldSource = activeToneInfo.source;
-                setTimeout(() => { try { oldSource.stop(); } catch(e){} }, 250);
-                activeToneInfo.source = null;
-                if (activeToneInfo.timer) clearTimeout(activeToneInfo.timer);
-                document.querySelectorAll('.string-node').forEach(n => n.classList.remove('active-tone'));
-                activeToneInfo.mode = null;
-            }
-        }
-
-        function updateStringNodes() {
-            const nodes = document.getElementById('stringNodes'); nodes.innerHTML = '';
-            const inst = document.getElementById('instrumentSelect').value;
-            INSTRUMENTS[inst].forEach(freq => {
-                let node = document.createElement('div'); node.className = 'string-node';
-                let h = 12 * Math.log2(freq / 440); node.textContent = NOTES[(Math.round(h) + 69) % 12];
-                let lastClick = 0;
-                node.onclick = () => {
-                    const now = Date.now();
-                    const isDoubleClick = (now - lastClick < 300);
-                    lastClick = now;
-                    initAudio();
-                    if (activeToneInfo.source) {
-                        const sameFreq = activeToneInfo.freq === freq;
-                        stopActiveTone();
-                        if (sameFreq && !isDoubleClick) { activeToneInfo.freq = null; return; }
-                    }
-                    activeToneInfo.freq = freq;
-                    node.classList.add('active-tone');
-                    const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
-                    osc.type = 'triangle'; osc.frequency.value = freq;
-                    g.gain.setValueAtTime(0, audioCtx.currentTime);
-                    g.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.1);
-                    osc.connect(g); g.connect(audioCtx.destination);
-                    const tG = audioCtx.createGain(); osc.connect(tG); tG.connect(analyser);
-                    osc.start(); activeToneInfo.source = osc; activeToneInfo.gain = g;
-                    if (isDoubleClick) { activeToneInfo.mode = 'infinite'; } 
-                    else { 
-                        activeToneInfo.mode = 'timed';
-                        activeToneInfo.timer = setTimeout(() => { stopActiveTone(); }, 2000);
-                    }
-                    if (!isTuning) { isTuning = true; drawTuner(); }
-                };
-                nodes.appendChild(node);
-            });
-        }
-
-        function autoCorrelate(buf, sampleRate) {
+        document.getElementById('manualBtn').onclick = () => { const p = document.getElementById('manualPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; };
+        
+        function autoCorrelate(buf, rate) {
             let rms = 0; for (let i = 0; i < buf.length; i++) rms += buf[i] * buf[i];
             rms = Math.sqrt(rms / buf.length);
-            const threshold = document.getElementById('noiseToggle').checked ? 0.05 : 0.015;
-            if (rms < threshold) return -1;
+            if (rms < (document.getElementById('noiseToggle').checked ? 0.05 : 0.015)) return -1;
             let c = new Float32Array(buf.length);
             for (let i = 0; i < buf.length; i++) { for (let j = 0; j < buf.length - i; j++) c[i] = c[i] + buf[j] * buf[j + i]; }
             let d = 0; while (c[d] > c[d + 1]) d++;
             let maxval = -1, maxpos = -1;
             for (let i = d; i < buf.length; i++) { if (c[i] > maxval) { maxval = c[i]; maxpos = i; } }
-            return sampleRate / maxpos;
+            return rate / maxpos;
         }
 
         function drawTuner() {
@@ -396,127 +231,139 @@
                 lastNoteTime = Date.now();
                 let targets = INSTRUMENTS[document.getElementById('instrumentSelect').value];
                 let closest = targets.reduce((a, b) => Math.abs(b - freq) < Math.abs(a - freq) ? b : a);
-                let centsOff = 1200 * Math.log2(freq / closest);
-                smoothedCents = (smoothedCents * 0.8) + (centsOff * 0.2);
-                needle.style.transform = `rotate(${Math.max(-50, Math.min(50, smoothedCents)) * 0.9}deg)`;
+                let cents = 1200 * Math.log2(freq / closest);
+                smoothedCents = (smoothedCents * 0.8) + (cents * 0.2);
+                needle.style.transform = `rotate(${Math.max(-50, Math.min(50, smoothedCents * 0.9))}deg)`;
                 nDisplay.textContent = NOTES[(Math.round(12 * Math.log2(closest / 440)) + 69) % 12];
-                document.getElementById('tunerCard').classList.toggle('in-tune', Math.abs(centsOff) < 4);
-            } else if (Date.now() - lastNoteTime > 800) {
-                needle.style.transform = `rotate(-50deg)`; nDisplay.textContent = "-";
-                document.getElementById('tunerCard').classList.remove('in-tune');
-            }
+            } else if (Date.now() - lastNoteTime > 800) { needle.style.transform = `rotate(-50deg)`; nDisplay.textContent = "-"; }
             requestAnimationFrame(drawTuner);
         }
 
         document.getElementById('tunerBtn').onclick = async () => {
-            initAudio(); 
+            initAudio();
             if (!isTuning) {
-                try { 
+                try {
                     const s = await navigator.mediaDevices.getUserMedia({ audio: true });
                     audioCtx.createMediaStreamSource(s).connect(analyser);
-                    isTuning = true; drawTuner(); document.getElementById('tunerBtn').textContent = "STOP";
-                } catch (e) { alert("Mic nodig."); }
+                    isTuning = true; drawTuner(); document.getElementById('tunerBtn').textContent = "STOP TUNER";
+                } catch (e) { alert("Microfoon nodig."); }
             } else { isTuning = false; document.getElementById('tunerBtn').textContent = "START TUNER"; }
         };
 
-        // --- RECORDER LOGICA ---
-        document.getElementById('recBtn').onclick = async () => {
-            initAudio(); 
-            if (!isRecording) {
-                try { 
-                    recordStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    mediaRecorder = new MediaRecorder(recordStream); audioChunks = [];
-                    document.getElementById('recordStatus').style.display = 'block';
-                    mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
-                    mediaRecorder.onstop = () => {
-                        document.getElementById('recordStatus').style.display = 'none';
-                        recordStream.getTracks().forEach(track => track.stop());
-                        const blob = new Blob(audioChunks, { type: 'audio/wav' }); 
-                        const url = URL.createObjectURL(blob);
-                        const log = document.getElementById('logContent'); 
-                        if (log.innerHTML.includes('Geen opnames')) log.innerHTML = '';
-                        const entry = document.createElement('div'); entry.className = 'log-entry';
-                        entry.innerHTML = `<div class="log-row-top"><input type="text" class="edit-name-input" value="${document.getElementById('recordName').value || 'Track'}"></div><div class="log-row-bottom"><button class="small-btn btn-play">PLAY</button><button class="small-btn btn-save">SAVE</button><button class="small-btn btn-del">DEL</button></div>`;
-                        let a = new Audio(url);
-                        entry.querySelector('.btn-play').onclick = function() { 
-                            if (activeLogAudio && !a.paused) { a.pause(); this.textContent = "PLAY"; } 
-                            else { if (activeLogAudio) activeLogAudio.pause(); a.play(); this.textContent = "STOP"; activeLogAudio = a; a.onended=()=>this.textContent="PLAY"; } 
-                        };
-                        entry.querySelector('.btn-save').onclick = () => { 
-                            const link = document.createElement('a'); link.href = url; link.download = `${entry.querySelector('.edit-name-input').value}.wav`; link.click(); 
-                        };
-                        entry.querySelector('.btn-del').onclick = () => { if(confirm("Wissen?")) entry.remove(); };
-                        log.prepend(entry);
-                    };
-                    mediaRecorder.start(); isRecording = true; document.getElementById('recBtn').textContent = "STOP";
-                } catch (e) { alert("Mic nodig."); }
-            } else { mediaRecorder.stop(); isRecording = false; document.getElementById('recBtn').textContent = "START OPNAME"; }
+        function updateDisplays() {
+            document.getElementById('bpmDisp').textContent = document.getElementById('tempoSlider').value + " BPM";
+            if (document.getElementById('timerActive').checked) {
+                const m = Math.floor(practiceTimeLeft / 60); const s = practiceTimeLeft % 60;
+                document.getElementById('timerDisp').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+            } else { document.getElementById('timerDisp').textContent = document.getElementById('tempoSlider').value; }
+        }
+        document.getElementById('tempoSlider').oninput = updateDisplays;
+        document.getElementById('timerSlider').oninput = () => { if(!isRunning) { practiceTimeLeft = document.getElementById('timerSlider').value * 60; updateDisplays(); } };
+
+        document.getElementById('masterStartBtn').onclick = function() {
+            initAudio();
+            if (!isRunning) {
+                isRunning = true; this.textContent = "STOP"; this.style.background = "var(--griffin-red)";
+                document.getElementById('pauseBtn').style.display = "block";
+                nextNoteTime = audioCtx.currentTime; 
+                if(document.getElementById('metroActive').checked) { currentStep = 0; setupRing(); metroTick(); }
+                practiceInterval = setInterval(() => {
+                    if(!isPaused && document.getElementById('timerActive').checked) {
+                        practiceTimeLeft--; updateDisplays();
+                        if(practiceTimeLeft <= 0) {
+                            const step = parseFloat(document.getElementById('speedStep').value);
+                            if(step > 0) { document.getElementById('tempoSlider').value = Math.min(220, Math.round(document.getElementById('tempoSlider').value * (1+step))); }
+                            practiceTimeLeft = document.getElementById('timerSlider').value * 60;
+                        }
+                    }
+                }, 1000);
+            } else { 
+                isRunning = false; clearInterval(practiceInterval); clearTimeout(metroTimer);
+                this.textContent = "START"; this.style.background = "var(--celtic-green)";
+                document.getElementById('pauseBtn').style.display = "none";
+                practiceTimeLeft = document.getElementById('timerSlider').value * 60; updateDisplays();
+                document.querySelectorAll('.ring-segment').forEach(s => s.classList.remove('active'));
+            }
         };
 
-        // --- METRONOOM LOGICA ---
+        function metroTick() {
+            if(!isRunning || isPaused || !document.getElementById('metroActive').checked) return;
+            while (nextNoteTime < audioCtx.currentTime + 0.1) {
+                const sig = document.getElementById('timeSig').value; const bpm = document.getElementById('tempoSlider').value;
+                const count = parseInt(sig);
+                const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                osc.frequency.setValueAtTime(currentStep === 0 ? 1000 : 800, nextNoteTime);
+                g.gain.setValueAtTime(0.2, nextNoteTime); g.gain.exponentialRampToValueAtTime(0.001, nextNoteTime + 0.05);
+                osc.connect(g); g.connect(audioCtx.destination); osc.start(nextNoteTime); osc.stop(nextNoteTime + 0.1);
+                document.querySelectorAll('.ring-segment').forEach((s, i) => s.classList.toggle('active', i === currentStep));
+                nextNoteTime += 60 / bpm; currentStep = (currentStep + 1) % count;
+            }
+            metroTimer = setTimeout(metroTick, 25);
+        }
+
         function setupRing() {
             const container = document.getElementById('segmentsLayer'); container.innerHTML = '';
             const sig = document.getElementById('timeSig').value;
-            let count = (sig === '2' || sig === '2-march' || sig === '12') ? 12 : (sig === '9' ? 9 : (sig === '6' ? 6 : (sig === '3' ? 3 : 4)));
+            const count = parseInt(sig);
             const radius = 42; const circ = 2 * Math.PI * radius;
             for (let i = 0; i < count; i++) {
                 const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
                 c.setAttribute("cx", 50); c.setAttribute("cy", 50); c.setAttribute("r", radius);
-                c.classList.add("ring-segment");
-                c.style.strokeDasharray = `${(circ/count)-3} ${circ}`;
-                c.style.strokeDashoffset = -((circ/count)*i);
-                let color = 'var(--griffin-orange)';
-                if (i === 0) color = '#2ecc71'; 
-                else if ((sig === '6' || sig === '12' || sig === '9') && i % 3 === 0) color = '#2ecc71'; 
-                else if (sig === '4' && i === 2) color = '#2ecc71'; 
-                c.style.stroke = color; c.id = `seg-${i}`; container.appendChild(c);
+                c.style.fill = 'none'; c.style.strokeWidth = '12'; c.style.strokeLinecap = 'round';
+                c.style.opacity = '0.15'; c.style.strokeDasharray = `${(circ/count)-3} ${circ}`;
+                c.style.strokeDashoffset = -((circ/count)*i); c.style.stroke = (i === 0) ? '#2ecc71' : 'var(--griffin-orange)';
+                c.classList.add('ring-segment'); container.appendChild(c);
             }
         }
 
-        function playClick(time, freq, isAccent) {
+        document.getElementById('recordBtn').onclick = async function() {
+            initAudio(); const btn = document.getElementById('recordBtn'); const card = document.getElementById('recorderCard');
+            if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream); chunks = [];
+                    mediaRecorder.ondataavailable = e => chunks.push(e.data);
+                    mediaRecorder.onstop = () => {
+                        const blob = new Blob(chunks, { type: 'audio/wav' }); const url = URL.createObjectURL(blob);
+                        const label = (document.getElementById('locField').value || "Sessie") + " - " + (document.getElementById('trackField').value || "Take");
+                        const log = document.getElementById('sessionLog'); if (log.innerHTML.includes('leeg')) log.innerHTML = '';
+                        const div = document.createElement('div'); div.className = 'log-entry';
+                        div.innerHTML = `<input type="text" class="log-input-edit" value="${label}"><div style="display:flex; justify-content:flex-end; gap:8px; margin-top:5px;"><button class="small-btn save-btn">SAVE</button><button class="small-btn del-btn">DEL</button></div>`;
+                        div.querySelector('.del-btn').onclick = () => div.remove();
+                        div.querySelector('.save-btn').onclick = () => { const finalName = div.querySelector('.log-input-edit').value; const a = document.createElement('a'); a.href = url; a.download = finalName + ".wav"; a.click(); };
+                        log.prepend(div); stream.getTracks().forEach(t => t.stop());
+                    };
+                    mediaRecorder.start(); btn.textContent = "STOP OPNAME"; btn.style.background = "var(--griffin-red)"; card.classList.add('recording-active');
+                } catch(e) { alert("Mic nodig."); }
+            } else { mediaRecorder.stop(); btn.textContent = "START OPNAME"; btn.style.background = "var(--celtic-green)"; card.classList.remove('recording-active'); }
+        };
+
+        function playTone(freq, dur) {
+            if(activeTone.source) { try{activeTone.source.stop();}catch(e){} }
             const osc = audioCtx.createOscillator(); const g = audioCtx.createGain();
-            const type = document.getElementById('soundType').value;
-            const vol = document.getElementById('volumeSlider').value;
-            if(type === 'wood') { osc.type = 'square'; g.gain.exponentialRampToValueAtTime(0.001, time + 0.08); }
-            else if(type === 'click') { osc.type = 'triangle'; g.gain.exponentialRampToValueAtTime(0.001, time + 0.04); }
-            else { osc.type = 'sine'; g.gain.exponentialRampToValueAtTime(0.001, time + 0.1); }
-            osc.frequency.setValueAtTime(isAccent ? freq * 1.2 : freq, time);
-            g.gain.setValueAtTime(0.3 * vol, time);
-            osc.connect(g); g.connect(audioCtx.destination); osc.start(time); osc.stop(time + 0.1);
+            osc.type = 'triangle'; osc.frequency.value = freq; g.gain.value = 0.15;
+            osc.connect(g); g.connect(audioCtx.destination); osc.start(); activeTone = {source: osc, freq: freq};
+            if(dur > 0) setTimeout(() => { if(activeTone.freq === freq) { try{osc.stop();}catch(e){} } }, dur);
         }
 
-        function metroStep() {
-            while (isRunning && nextNoteTime < audioCtx.currentTime + 0.1) {
-                const sig = document.getElementById('timeSig').value;
-                const bpm = parseInt(document.getElementById('tempoSlider').value);
-                const stepDur = (sig === '2' || sig === '2-march') ? (60/bpm)/6 : (['6','9','12'].includes(sig) ? (60/bpm)/3 : 60/bpm);
-                document.querySelectorAll('.ring-segment').forEach(s => s.classList.remove('active'));
-                if(sig === '2' || sig === '2-march') {
-                    const seg = document.getElementById(`seg-${currentStep}`); if(seg) seg.classList.add('active');
-                    if(currentStep === 0) playClick(nextNoteTime, 800, true); if(currentStep === 6) playClick(nextNoteTime, 600, false);
-                    nextNoteTime += stepDur; currentStep = (currentStep + 1) % 12;
-                } else if(['6','9','12'].includes(sig)) {
-                    const seg = document.getElementById(`seg-${currentStep}`); if(seg) seg.classList.add('active');
-                    if(currentStep % 3 === 0) playClick(nextNoteTime, 800, currentStep === 0);
-                    nextNoteTime += stepDur; currentStep = (currentStep + 1) % parseInt(sig);
-                } else {
-                    const seg = document.getElementById(`seg-${currentStep}`); if(seg) seg.classList.add('active');
-                    playClick(nextNoteTime, 800, currentStep === 0);
-                    nextNoteTime += (sig==='4-dotted' ? (currentStep%2===0?0.75:0.25)*(60/bpm)*2 : 60/bpm);
-                    currentStep = (currentStep + 1) % (sig==='4-dotted'?4:parseInt(sig));
-                }
-            }
-            if(isRunning) metroTimer = setTimeout(metroStep, 25);
+        function updateNodes() {
+            const container = document.getElementById('stringNodes'); container.innerHTML = '';
+            INSTRUMENTS[document.getElementById('instrumentSelect').value].forEach(freq => {
+                const n = document.createElement('div'); n.className = 'string-node';
+                n.textContent = NOTES[(Math.round(12 * Math.log2(freq/440)) + 69) % 12];
+                let clickTimer = null;
+                n.onclick = () => { initAudio(); if(!clickTimer) { clickTimer = setTimeout(() => { playTone(freq, 2000); clickTimer = null; }, 400); } 
+                else { clearTimeout(clickTimer); clickTimer = null; playTone(freq, 0); } };
+                container.appendChild(n);
+            });
         }
 
-        document.getElementById('metroBtn').onclick = () => { initAudio(); isRunning = !isRunning; if(isRunning) { nextNoteTime = audioCtx.currentTime; currentStep = 0; metroStep(); document.getElementById('metroBtn').textContent="STOP"; } else { clearTimeout(metroTimer); document.getElementById('metroBtn').textContent="START"; } };
+        document.getElementById('instrumentSelect').onchange = updateNodes;
         document.getElementById('timeSig').onchange = setupRing;
-        document.getElementById('tempoSlider').oninput = () => document.getElementById('bpmText').textContent = tempoSlider.value;
-        document.getElementById('manualBtn').onclick = () => { const p = document.getElementById('manualPanel'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; };
-        document.getElementById('instrumentSelect').onchange = updateStringNodes;
+        Object.keys(INSTRUMENTS).forEach(inst => { const opt = document.createElement('option'); opt.value = inst; opt.textContent = inst; document.getElementById('instrumentSelect').appendChild(opt); });
+        document.getElementById('pauseBtn').onclick = () => { isPaused = !isPaused; document.getElementById('pauseBtn').textContent = isPaused ? "VERDER" : "PAUZE"; if(!isPaused && document.getElementById('metroActive').checked) { nextNoteTime = audioCtx.currentTime; metroTick(); } };
         
-        Object.keys(INSTRUMENTS).forEach(inst => { let opt = document.createElement('option'); opt.value = inst; opt.textContent = inst; instrumentSelect.appendChild(opt); });
-        setupRing(); updateStringNodes();
+        setupRing(); updateNodes(); updateDisplays();
     </script>
 </body>
 </html>
