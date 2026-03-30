@@ -194,7 +194,7 @@
         let activeTone = { source: null, freq: null }, practiceInterval, lastNoteTime = 0, smoothedCents = -50;
         let mediaRecorder, chunks = [];
 
-        const INSTRUMENTS = { "Gitaar": [82.41, 110.0, 146.83, 196.0, 246.94, 329.63], "Banjo": [196.0, 293.66, 440.0, 659.25], "Bouzouki": [196.0, 146.83, 220.0, 293.66], "Viool": [196.0, 293.66, 440.0, 659.25] };
+        const INSTRUMENTS = { "Gitaar": [82.41, 110.0, 146.83, 196.0, 246.94, 329.63],"Bas": [41.20, 55.0, 73.42, 98.0],"Banjo": [196.0, 293.66, 440.0, 659.25], "Bouzouki": [196.0, 146.83, 220.0, 293.66], "Viool": [196.0, 293.66, 440.0, 659.25] };
         const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
         function initAudio() { if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); analyser = audioCtx.createAnalyser(); analyser.fftSize = 2048; dataArray = new Float32Array(2048); } if(audioCtx.state === 'suspended') audioCtx.resume(); }
